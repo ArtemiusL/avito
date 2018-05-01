@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.centered {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.layout-main {
+  box-sizing: border-box;
+  flex-basis: 62%;
+  flex-wrap: nowrap;
+  min-height: 100%;
+  width: 62%;
+}
+
+.layout-sidebar {
+  box-sizing: border-box;
+  flex-basis: 38%;
+  padding: 0 20px;
+  width: 38%;
+}

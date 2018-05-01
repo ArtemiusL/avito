@@ -1,0 +1,46 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $color-white;
+  border-top: solid 15px $color-mine-shaft;
+  font-size: 18px;
+  font-family: 'system-ui', Helvetica, sans-serif;
+  margin: 0 auto;
+  min-height: 100%;
+  padding-top: 30px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  overflow-x: hidden;
+  min-width: 320px;
+  width: 100%;
+  max-width: 100%;
+}
+
+h1 {
+  color: $color-white;
+  font-size: 21px;
+  letter-spacing: -1px;
+  margin: 0;
+  position: absolute;
+  top: -5px;
+  left: 0;
+}
+
+a {
+  color: $color-black;
+  text-decoration-color: $color-dusty-gray;
+}
+
+a:hover {
+  color: $color-dusty-gray;
+}
+
+a:link:visited {
+  color: $color-mine-shaft;
+}

@@ -1,0 +1,12 @@
+.DS_Store
+*.log
+
+coverage
+node_modules
+public/assets
+webpack-assets.json
+webpack-stats.json
+*.psd
+gg.png
+/GooseGaming_материалы
+/source
