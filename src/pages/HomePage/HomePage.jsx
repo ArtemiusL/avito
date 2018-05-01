@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import LayoutContent from '_components/LayoutContent';
 import Form from '_components/Form';
 
@@ -18,8 +19,21 @@ class HomePage extends PureComponent {
   componentDidMount() {
     this.props.onFetchProducts();
   }
+  generateQuery = (values) => {
+    let string = '';
+    Object.keys(values).forEach((key) => {
+      string += `?${key}=${values[key]}`;
+    });
+    return string;
+  }
   handleSubmit = (values) => {
-    console.log(values);
+    const { onPushHistory, location } = this.props;
+    const query = this.generateQuery(values);
+
+    onPushHistory({
+      ...location,
+      search: query,
+    });
   }
 
   render() {
@@ -43,17 +57,22 @@ class HomePage extends PureComponent {
 }
 
 HomePage.propTypes = {
+  location: PropTypes.object,
+  onPushHistory: PropTypes.func,
   products: PropTypes.array,
   onFetchProducts: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
-  products: (state.products.data),
+  products: state.products.data,
 });
 
 const mapDispatchToProps = dispatch => ({
   onFetchProducts() {
     dispatch(fetchProducts());
+  },
+  onPushHistory(params) {
+    dispatch(push(params));
   },
 });
 

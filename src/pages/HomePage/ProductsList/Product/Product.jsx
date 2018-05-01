@@ -11,12 +11,13 @@ const Product = ({
   price,
   address: { lat },
   year,
+  pictures,
   datePuclication,
  }) => (
   <div className={className} styleName="root">
     <picture styleName="product-pic">
-      <a href="#" styleName="product-pic-number">10</a>
-      <img width="120" />
+      <a href="#" styleName="product-pic-number">{pictures.length}</a>
+      <img src={pictures[0]} width="120" />
     </picture>
     <div styleName="product-description">
         <button styleName="product-favorite">Добавить в избранное</button>

@@ -7,7 +7,7 @@ import styles from './ProductsList.scss';
 
 const ProductsList = ({ className, data }) => (
   <div className={className}>
-    {data.map(item => (
+    {data.length !== 0 && data.map(item => (
       <Product
         key={item.id}
         styleName="products-list-item"
