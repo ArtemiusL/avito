@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { reduxForm, Field } from 'redux-form';
 import RadioButtonGroup from '_components/RadioButtonGroup';
 import InputRange from '_components/InputRange';
+import InputCheckbox from '_components/InputCheckbox';
 
 import styles from './Form.scss';
 
@@ -26,12 +27,32 @@ const fishRadio = [
   },
 ];
 
+const initialValuesForm = {
+  isFavorite: false,
+  category: 'all',
+  sort: 'popular',
+  price: 3000,
+};
+
 @CSSModules(styles, { allowMultiple: true })
 class Form extends PureComponent {
   render() {
     const { className, handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit} className={className}>
+      <form
+        className={className}
+        onSubmit={handleSubmit}
+      >
+
+        <fieldset styleName="group">
+          <Field
+            styleName="field"
+            name="isFavorite"
+            label="Показывать избранные"
+            component={InputCheckbox}
+          />
+        </fieldset>
+
         <fieldset styleName="group">
           Категория <br />
           <Field
@@ -63,7 +84,7 @@ class Form extends PureComponent {
           <span>1000 </span>
           <Field
             styleName="field"
-            name="range"
+            name="price"
             min={1000}
             max={5000}
             component={InputRange}
@@ -85,5 +106,6 @@ Form.propTypes = {
 
 export default reduxForm({
   form: 'search',
+  initialValues: initialValuesForm,
   destroyOnUnmount: false,
 })(Form);

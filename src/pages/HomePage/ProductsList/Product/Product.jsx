@@ -9,7 +9,8 @@ const Product = ({
   className,
   title,
   price,
-  adress,
+  address: { lat },
+  year,
   datePuclication,
  }) => (
   <div className={className} styleName="root">
@@ -21,8 +22,8 @@ const Product = ({
         <button styleName="product-favorite">Добавить в избранное</button>
         <h3 styleName="product-title"><a href="#">{title}</a></h3>
         <p styleName="product-price">{price}</p>
-        <p styleName="product-address">{adress}</p>
-        <p styleName="product-date">{datePuclication}</p>
+        <p styleName="product-address">{lat}</p>
+        <p styleName="product-date">{year}</p>
       </div>
   </div>
 );

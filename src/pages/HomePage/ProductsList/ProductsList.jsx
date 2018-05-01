@@ -5,33 +5,9 @@ import Product from './Product';
 
 import styles from './ProductsList.scss';
 
-const fishData = [
-  {
-    id: 1,
-    title: 'Квартира на Невском',
-    price: '8 000 000 ₽',
-    adress: 'м. Купчино, улица Лётчика Иванова, 3',
-    datePuclication: 'три дня назад',
-  },
-  {
-    id: 2,
-    title: 'Квартира на Невском',
-    price: '8 000 000 ₽',
-    adress: 'м. Купчино, улица Лётчика Иванова, 3',
-    datePuclication: 'три дня назад',
-  },
-  {
-    id: 3,
-    title: 'Квартира на Невском',
-    price: '8 000 000 ₽',
-    adress: 'м. Купчино, улица Лётчика Иванова, 3',
-    datePuclication: 'три дня назад',
-  },
-];
-
-const ProductsList = ({ className }) => (
+const ProductsList = ({ className, data }) => (
   <div className={className}>
-    {fishData.map(item => (
+    {data.map(item => (
       <Product
         key={item.id}
         styleName="products-list-item"
@@ -43,6 +19,7 @@ const ProductsList = ({ className }) => (
 
 ProductsList.propTypes = {
   className: PropTypes.string,
+  data: PropTypes.array,
 };
 
 export default CSSModules(ProductsList, styles, { allowMultiple: true });

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 
@@ -6,15 +6,10 @@ import RadioButton from './RadioButton';
 import styles from './RadioButtonGroup.scss';
 
 @CSSModules(styles)
-class RadioButtonGroup extends Component {
-  state = {
-    activeButtonId: false,
-  };
-
+class RadioButtonGroup extends PureComponent {
   handleClick = (id, value) => {
     const { input: { onChange } } = this.props;
 
-    this.setState({ activeButtonId: id });
     onChange(value);
   };
 
@@ -22,11 +17,13 @@ class RadioButtonGroup extends Component {
     const {
       className,
       list,
+      input: { value },
       meta: { touched, error },
     } = this.props;
 
-    const { activeButtonId } = this.state;
     const hasError = error && touched;
+
+    console.log(value);
 
     return (
       <div className={className}>
@@ -36,7 +33,7 @@ class RadioButtonGroup extends Component {
               stylename="item"
               key={item.id}
               {...item}
-              isActive={activeButtonId === item.id}
+              isActive={value === item.value}
               onClick={this.handleClick}
             />
           ))}
@@ -60,6 +57,7 @@ RadioButtonGroup.propTypes = {
     error: PropTypes.string,
   }),
   input: PropTypes.shape({
+    value: PropTypes.string,
     onChange: PropTypes.func,
   }),
 };
