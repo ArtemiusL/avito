@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LayoutContent from '_components/LayoutContent';
 import Form from '_components/Form';
+import { objectToQueryString, queryStringToObject } from '_utils/query';
 
 import {
   fetchProducts,
@@ -14,26 +15,29 @@ import {
 import ProductsList from './ProductsList';
 import styles from './HomePage.scss';
 
+const initialValuesForm = {
+  isFavorite: true,
+  category: 'all',
+  sort: 'cheap-first',
+  price: 3000,
+};
+
 @CSSModules(styles, { allowMultiple: true })
 class HomePage extends PureComponent {
   componentDidMount() {
     this.props.onFetchProducts();
   }
-  generateQuery = (values) => {
-    let string = '';
-    Object.keys(values).forEach((key) => {
-      string += `?${key}=${values[key]}`;
-    });
-    return string;
-  }
+
   handleSubmit = (values) => {
     const { onPushHistory, location } = this.props;
-    const query = this.generateQuery(values);
+    const query = objectToQueryString(values);
 
     onPushHistory({
       ...location,
       search: query,
     });
+
+    console.log(queryStringToObject(query));
   }
 
   render() {
@@ -48,7 +52,7 @@ class HomePage extends PureComponent {
             />
           }
           rightContent={
-            <Form onSubmit={this.handleSubmit} styleName="products-filter" />
+            <Form initialValues={initialValuesForm} onSubmit={this.handleSubmit} styleName="products-filter" />
           }
         />
       </div>

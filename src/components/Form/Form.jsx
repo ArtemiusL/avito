@@ -27,13 +27,6 @@ const fishRadio = [
   },
 ];
 
-const initialValuesForm = {
-  isFavorite: false,
-  category: 'all',
-  sort: 'popular',
-  price: 3000,
-};
-
 @CSSModules(styles, { allowMultiple: true })
 class Form extends PureComponent {
   render() {
@@ -106,6 +99,5 @@ Form.propTypes = {
 
 export default reduxForm({
   form: 'search',
-  initialValues: initialValuesForm,
   destroyOnUnmount: false,
 })(Form);
