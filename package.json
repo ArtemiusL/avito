@@ -117,6 +117,7 @@
       "es6": true
     },
     "rules": {
+      "no-restricted-globals": 0,
       "global-require": 0,
       "no-underscore-dangle": 0,
       "no-console": 0,

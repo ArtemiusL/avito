@@ -23,8 +23,6 @@ class RadioButtonGroup extends PureComponent {
 
     const hasError = error && touched;
 
-    console.log(value);
-
     return (
       <div className={className}>
         <ul>
