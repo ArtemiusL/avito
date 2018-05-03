@@ -31,7 +31,7 @@ class FormContainer extends PureComponent {
       <div>
         <Form
           className={className}
-          initialValues={initialValues}
+          test={initialValues}
           onSubmit={this.handleSubmit}
         />
       </div>

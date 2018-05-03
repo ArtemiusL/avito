@@ -29,6 +29,10 @@ const fishRadio = [
 
 @CSSModules(styles, { allowMultiple: true })
 class Form extends PureComponent {
+  componentDidMount = () => {
+    const { initialize, test } = this.props;
+    initialize(test);
+  }
   render() {
     const { className, handleSubmit } = this.props;
     return (
@@ -95,6 +99,8 @@ class Form extends PureComponent {
 Form.propTypes = {
   className: PropTypes.string,
   handleSubmit: PropTypes.func,
+  initialize: PropTypes.func,
+  test: PropTypes.object,
 };
 
 export default reduxForm({
