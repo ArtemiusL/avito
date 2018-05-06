@@ -6,7 +6,7 @@ import {
 const defaultState = {
   isFavorite: true,
   category: 'all',
-  sort: 'cheap-first',
+  sort: 'asc',
   price: 2000,
   auto: {
     year: 2009,

@@ -18,12 +18,12 @@ const fishRadio = [
   {
     id: 2,
     title: 'дешевые',
-    value: 'cheap-first',
+    value: 'asc',
   },
   {
     id: 3,
     title: 'дорогие',
-    value: 'expensive-first',
+    value: 'desc',
   },
 ];
 
