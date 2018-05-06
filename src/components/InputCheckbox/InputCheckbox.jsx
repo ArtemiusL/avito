@@ -7,14 +7,14 @@ import styles from './InputCheckbox.scss';
 
 const InputCheckbox = ({
   className,
-  input: { onChange, value, name },
+  input: { onChange, value: checked, name },
   label,
 }) => (
-  <label htmlFor={name} styleName={classnames('root', { active: value })}>
+  <label htmlFor={name} styleName={classnames('root', { checked })}>
     {label}
     <input
       className={className}
-      value={value}
+      value={checked}
       id={name}
       styleName="input"
       type="checkbox"
