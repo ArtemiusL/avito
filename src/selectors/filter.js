@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createSelector } from 'reselect';
 import orderBy from 'lodash/fp/orderBy';
 
@@ -16,19 +17,30 @@ export const categoryFilterSelector = createSelector(
   ({ category }) => category,
 );
 
-export const filteredProductsSelector = createSelector(
+export const filteredCategorySelector = createSelector(
   productsSelector,
   filterSelector,
-  (products, { category, price }) => (category === 'all' ? products : filters.byPrice(
-    filters.category(
-      filters.byCategory(products, category),
-    ),
-    price,
-  )),
+  (products, { category, price }) => {
+    if (category === 'all') {
+      return products;
+    } return filters.byCategory(products, category);
+  }
+);
+
+export const filteredCurrentCategorySelector = createSelector(
+  filteredCategorySelector,
+  filterSelector,
+  (products, { category }) => (filtersp[category](products, products[category])),
+);
+
+export const filteredByPriceSelector = createSelector(
+  filteredCategorySelector,
+  filterSelector,
+  (products, { price }) => (filters.byPrice(products, price)),
 );
 
 export const sortedProducts = createSelector(
-  filteredProductsSelector,
+  filteredByPriceSelector,
   filterSelector,
-  (products, { sort }) => (orderBy(products, 'price', sort)),
+  (products, { sort }) => (orderBy('price', sort, products)),
 );

@@ -6,27 +6,28 @@ import Form from '_components/Form';
 import { queryStringToObject, objectToQueryString } from '_utils/query';
 import { push } from 'react-router-redux';
 
+import { changeFilter } from '_actions/filter';
+
 class FormContainer extends PureComponent {
   getInitialValues = state =>
     (
       { ...state, ...queryStringToObject(location.search) }
     );
   handleSubmit = (values) => {
-    console.log('work');
-    const { onPushHistory, location } = this.props;
+    const { onPushHistory, location, onChangeFilter } = this.props;
     const query = objectToQueryString(values);
 
     onPushHistory({
       ...location,
       search: query,
     });
+
+    onChangeFilter(values);
   }
 
   render() {
     const { className, filterValue } = this.props;
-    console.log('filterValue', filterValue);
     const initialValues = !__SERVER__ ? this.getInitialValues(filterValue) : filterValue;
-    console.log('initialValues', initialValues);
     return (
       <div>
         <Form
@@ -44,6 +45,7 @@ FormContainer.propTypes = {
   location: PropTypes.any,
   filterValue: PropTypes.object,
   onPushHistory: PropTypes.func,
+  onChangeFilter: PropTypes.func,
 };
 
 const { filterSelector } = selectors;
@@ -55,6 +57,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onPushHistory(params) {
     dispatch(push(params));
+  },
+  onChangeFilter(filters) {
+    dispatch(changeFilter(filters));
   },
 });
 

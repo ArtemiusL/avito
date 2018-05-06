@@ -52,5 +52,5 @@ export const laptop = (laptopes, filters) => (
 export const byCategory = (products, category) => (products.filter(
   item => item.category === category));
 
-  export const byPrice = (products, price) => (products.filter(
-    item => item.price < price));
+export const byPrice = (products, price) => (products.filter(
+  item => item.price < price));

@@ -83,10 +83,10 @@ class Form extends PureComponent {
             styleName="field"
             name="price"
             min={1000}
-            max={5000}
+            max={50000}
             component={InputRange}
           />
-          <span> 5000</span>
+          <span> 50000</span>
         </fieldset>
         <button styleName="btnSubmit" type="submit">
           Показать

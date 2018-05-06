@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
+import selectors from '_selectors';
 import { connect } from 'react-redux';
 import LayoutContent from '_components/LayoutContent';
 import FormContainer from '_containers/FormContainer';
@@ -21,6 +22,7 @@ class HomePage extends PureComponent {
 
   render() {
     const { products } = this.props;
+    console.log('products', products);
     return (
       <div>
         <Helmet title="Интернет-магазин" />
@@ -46,9 +48,12 @@ HomePage.propTypes = {
   onFetchProducts: PropTypes.func,
 };
 
+const { sortedProducts } = selectors;
+
 const mapStateToProps = state => ({
-  products: state.products.data,
+  products: sortedProducts(state),
 });
+
 
 const mapDispatchToProps = dispatch => ({
   onFetchProducts() {
