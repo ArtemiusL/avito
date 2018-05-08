@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { createSelector } from 'reselect';
 import orderBy from 'lodash/fp/orderBy';
 
@@ -20,27 +19,43 @@ export const categoryFilterSelector = createSelector(
 export const filteredCategorySelector = createSelector(
   productsSelector,
   filterSelector,
-  (products, { category, price }) => {
+  (products, { category }) => {
     if (category === 'all') {
-      return products;
-    } return filters.byCategory(products, category);
-  }
+      return [...products];
+    } return filters.byCategory([...products], category);
+  },
 );
 
 export const filteredCurrentCategorySelector = createSelector(
   filteredCategorySelector,
   filterSelector,
-  (products, { category }) => (filtersp[category](products, products[category])),
+  (products, productfilters) => {
+    const { category } = productfilters;
+    return (
+      category === 'all' ? [...products] : filters[category]([...products], productfilters[category])
+    );
+  },
 );
 
 export const filteredByPriceSelector = createSelector(
-  filteredCategorySelector,
+  filteredCurrentCategorySelector,
   filterSelector,
-  (products, { price }) => (filters.byPrice(products, price)),
+  (products, { price }) => (filters.byPrice([...products], price)),
 );
 
 export const sortedProducts = createSelector(
   filteredByPriceSelector,
   filterSelector,
-  (products, { sort }) => (orderBy('price', sort, products)),
+  (products, { sort }) => (orderBy('price', sort, [...products])),
+);
+
+export const pricesOfProdcutsSelector = createSelector(
+  filteredCategorySelector,
+  products => products.map(item => (item.price ? item.price : 0)),
+);
+
+
+export const maxPriceOfProducts = createSelector(
+  pricesOfProdcutsSelector,
+  prices => (Number.isNaN(Math.max(...prices)) ? 0 : Math.max(...prices)),
 );

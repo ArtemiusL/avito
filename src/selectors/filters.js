@@ -19,16 +19,16 @@ const getNumberFromResolutions = (resolution) => {
 
 export const auto = (autos, filters) => (
   autos
-    .filter(item => item.year > filters.year)
-    .filter(item => item.gearbox === filters.gearbox)
-    .filter(item => item.body_type === filters.body_type)
+    .filter(item => (item.year ? item.year > filters.year : true))
+    .filter(item => (item.gearbox ? item.gearbox === filters.gearbox : true))
+    .filter(item => (item.body_type ? item.body_type === filters.body_type : true))
 );
 
-export const immovables = (immovableses, filters) => (
+export const immovable = (immovableses, filters) => (
   immovableses
-    .filter(item => item.property_type === filters.property_type)
-    .filter(item => item.square > filters.square)
-    .filter(item => item.rooms === filters.rooms)
+    .filter(item => (item.property_type === filters.property_type))
+    .filter(item => (item.square > filters.square))
+    .filter(item => (item.rooms === filters.rooms))
 );
 
 export const cameras = (camerases, filters) => (
@@ -41,7 +41,7 @@ export const cameras = (camerases, filters) => (
     )
 );
 
-export const laptop = (laptopes, filters) => (
+export const laptops = (laptopes, filters) => (
   laptopes
     .filter(item => item.laptop_type === filters.laptop_type)
     .filter(item => Number(item.ram) > Number(filters.ram))
@@ -50,7 +50,7 @@ export const laptop = (laptopes, filters) => (
 );
 
 export const byCategory = (products, category) => (products.filter(
-  item => item.category === category));
+  item => (item.category === category)));
 
 export const byPrice = (products, price) => (products.filter(
-  item => item.price < price));
+  item => (item.price ? item.price < price : true)));

@@ -6,6 +6,7 @@ import { reduxForm, Field } from 'redux-form';
 import RadioButtonGroup from '_components/RadioButtonGroup';
 import InputRange from '_components/InputRange';
 import InputCheckbox from '_components/InputCheckbox';
+import CategoryFilter from '_components/CategoryFilter';
 
 import styles from './Form.scss';
 
@@ -30,11 +31,18 @@ const fishRadio = [
 @CSSModules(styles, { allowMultiple: true })
 class Form extends PureComponent {
   componentDidMount = () => {
-    const { initialize, test } = this.props;
-    initialize(test);
+    const { initialize, dataForInitialize } = this.props;
+    initialize(dataForInitialize);
   }
   render() {
-    const { className, handleSubmit } = this.props;
+    const {
+      className,
+      maxPrice,
+      handleSubmit,
+      category,
+      dataForInitialize,
+    } = this.props;
+    console.log('category', category);
     return (
       <form
         className={className}
@@ -65,6 +73,11 @@ class Form extends PureComponent {
           </Field>
         </fieldset>
 
+        <CategoryFilter
+          styleName="group"
+          type={category || dataForInitialize.category}
+        />
+
         <fieldset styleName="group">
           Сначала:
           <Field
@@ -78,15 +91,14 @@ class Form extends PureComponent {
         <fieldset styleName="group">
           Максимальная цена:
           <br />
-          <span>1000 </span>
           <Field
             styleName="field"
             name="price"
             min={1000}
-            max={50000}
+            step={500}
+            max={maxPrice}
             component={InputRange}
           />
-          <span> 50000</span>
         </fieldset>
         <button styleName="btnSubmit" type="submit">
           Показать
@@ -98,9 +110,11 @@ class Form extends PureComponent {
 
 Form.propTypes = {
   className: PropTypes.string,
+  maxPrice: PropTypes.number,
   handleSubmit: PropTypes.func,
   initialize: PropTypes.func,
-  test: PropTypes.object,
+  dataForInitialize: PropTypes.object,
+  category: PropTypes.string,
 };
 
 export default reduxForm({

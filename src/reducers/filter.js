@@ -6,8 +6,8 @@ import {
 const defaultState = {
   isFavorite: true,
   category: 'all',
-  sort: 'asc',
-  price: 2000,
+  sort: 'popular',
+  price: 50000,
   auto: {
     year: 2009,
     gearbox: 'automatic',
