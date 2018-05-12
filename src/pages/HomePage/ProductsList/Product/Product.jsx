@@ -6,16 +6,26 @@ import styles from './Product.scss';
 
 const Product = ({
   className,
+  id,
   title,
   price,
   address: { lat },
   year,
   pictures,
+  onClick,
 }) => {
+  const handleClick = () => {
+    onClick(id);
+  };
+
   const formatePrice = curPrice => `${splitPrice(curPrice)} р.`;
 
   return (
-    <div className={className} styleName="root">
+    <div
+      className={className}
+      styleName="root"
+      onClick={handleClick}
+    >
       <picture styleName="product-pic">
         <span styleName="product-pic-number">{pictures.length}</span>
         <img src={pictures[0]} alt="ads" width="120" />
@@ -38,6 +48,8 @@ Product.propTypes = {
   address: PropTypes.object,
   year: PropTypes.number,
   pictures: PropTypes.array,
+  id: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default CSSModules(Product, styles, { allowMultiple: true });

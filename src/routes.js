@@ -1,11 +1,10 @@
-import HomePage from '_pages/HomePage';
 import NotFoundPage from '_pages/NotFoundPage';
+import Preview from '_pages/HomePage/Preview';
 
 export default [
   {
-    path: '/',
-    exact: true,
-    component: HomePage, // Add your route here
+    path: '/product/:id',
+    component: Preview,
   },
   {
     path: '*',
