@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const InputRange = ({
   className,
   input: { onChange, value },
+  isFirstFetchData,
   min,
   max,
   step,
@@ -12,7 +13,7 @@ const InputRange = ({
     <span>{min}</span>
     <input
       className={className}
-      value={value}
+      value={isFirstFetchData ? max : value}
       type="range"
       min={min}
       max={max}
@@ -31,6 +32,7 @@ InputRange.propTypes = {
   input: PropTypes.shape({
     onChange: PropTypes.func,
   }),
+  isFirstFetchData: PropTypes.bool,
 };
 
 export default InputRange;

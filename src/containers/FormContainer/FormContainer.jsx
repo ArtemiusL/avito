@@ -32,8 +32,10 @@ class FormContainer extends PureComponent {
       filterValue,
       maxPrice,
       category,
+      isFirstFetchData,
     } = this.props;
     const initialValues = !__SERVER__ ? this.getInitialValues(filterValue) : filterValue;
+
     return (
       <div>
         <Form
@@ -42,6 +44,7 @@ class FormContainer extends PureComponent {
           onSubmit={this.handleSubmit}
           maxPrice={maxPrice}
           category={category}
+          isFirstFetchData={isFirstFetchData}
         />
       </div>
     );
@@ -54,15 +57,22 @@ FormContainer.propTypes = {
   maxPrice: PropTypes.number,
   filterValue: PropTypes.object,
   category: PropTypes.string,
+  isFirstFetchData: PropTypes.bool,
   onPushHistory: PropTypes.func,
   onChangeFilter: PropTypes.func,
 };
 
-const { filterSelector, maxPriceOfProducts } = selectors;
+const {
+  filterSelector,
+  maxPriceOfProducts,
+  isFirstFetchDataSelector,
+} = selectors;
+
 const serchFormSelector = formValueSelector('search');
 const mapStateToProps = state => ({
   filterValue: filterSelector(state),
   maxPrice: maxPriceOfProducts(state),
+  isFirstFetchData: isFirstFetchDataSelector(state),
   category: serchFormSelector(state, 'category'),
 });
 

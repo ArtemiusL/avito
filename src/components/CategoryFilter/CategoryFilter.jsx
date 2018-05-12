@@ -9,7 +9,7 @@ import styles from './CategoryFilter.scss';
 
 const currentData = new Date();
 
-const CategoryFilter = ({ className, type }) => {
+const CategoryFilter = ({ className, type, isFirstFetchData }) => {
   switch (type) {
     case 'auto':
       return (
@@ -22,6 +22,7 @@ const CategoryFilter = ({ className, type }) => {
             step={1}
             max={currentData.getFullYear()}
             component={InputRange}
+            isFirstFetchData={isFirstFetchData}
           />
 
           <br />
@@ -72,6 +73,7 @@ const CategoryFilter = ({ className, type }) => {
             step={1}
             max={200}
             component={InputRange}
+            isFirstFetchData={isFirstFetchData}
           />
 
           <br />
@@ -110,6 +112,7 @@ const CategoryFilter = ({ className, type }) => {
             step={1}
             max={30}
             component={InputRange}
+            isFirstFetchData={isFirstFetchData}
           />
 
           <br />
@@ -187,6 +190,7 @@ const CategoryFilter = ({ className, type }) => {
 CategoryFilter.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
+  isFirstFetchData: PropTypes.bool,
 };
 
 export default CSSModules(CategoryFilter, styles, { allowMultiple: true });

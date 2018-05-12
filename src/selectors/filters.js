@@ -17,12 +17,15 @@ const getNumberFromResolutions = (resolution) => {
   }
 };
 
-export const auto = (autos, filters) => (
-  autos
-    .filter(item => (item.year ? item.year > filters.year : true))
-    .filter(item => (item.gearbox ? item.gearbox === filters.gearbox : true))
-    .filter(item => (item.body_type ? item.body_type === filters.body_type : true))
-);
+export const auto = (autos, filters) => {
+  console.log('autos', autos, 'filters', filters);
+  return (
+    autos
+      .filter(item => (item.year ? (item.year > filters.year) : true))
+      .filter(item => (item.gearbox ? item.gearbox === filters.gearbox : true))
+      .filter(item => (item.body_type ? item.body_type === filters.body_type : true))
+  );
+};
 
 export const immovable = (immovableses, filters) => (
   immovableses
@@ -49,8 +52,10 @@ export const laptops = (laptopes, filters) => (
     .filter(item => item.processor === filters.processor)
 );
 
-export const byCategory = (products, category) => (products.filter(
-  item => (item.category === category)));
+export const byCategory = (products, category) => {
+  console.log('category', category);
+  return (products.filter(item => (item.category === category)));
+};
 
 export const byPrice = (products, price) => (products.filter(
   item => (item.price ? item.price < price : true)));

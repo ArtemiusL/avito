@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createSelector } from 'reselect';
 import orderBy from 'lodash/fp/orderBy';
 
@@ -20,6 +21,7 @@ export const filteredCategorySelector = createSelector(
   productsSelector,
   filterSelector,
   (products, { category }) => {
+    console.log('category in filter', category);
     if (category === 'all') {
       return [...products];
     } return filters.byCategory([...products], category);
@@ -57,5 +59,7 @@ export const pricesOfProdcutsSelector = createSelector(
 
 export const maxPriceOfProducts = createSelector(
   pricesOfProdcutsSelector,
-  prices => (Number.isNaN(Math.max(...prices)) ? 0 : Math.max(...prices)),
+  prices => {
+    return prices.length === 0 ? 0 : Math.max(...prices);
+  },
 );

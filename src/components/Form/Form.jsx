@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
@@ -28,10 +29,12 @@ const fishRadio = [
   },
 ];
 
+
 @CSSModules(styles, { allowMultiple: true })
 class Form extends PureComponent {
   componentDidMount = () => {
     const { initialize, dataForInitialize } = this.props;
+    console.log('dataForInitialize', dataForInitialize);
     initialize(dataForInitialize);
   }
   render() {
@@ -41,8 +44,9 @@ class Form extends PureComponent {
       handleSubmit,
       category,
       dataForInitialize,
+      isFirstFetchData,
     } = this.props;
-    console.log('category', category);
+
     return (
       <form
         className={className}
@@ -75,6 +79,7 @@ class Form extends PureComponent {
 
         <CategoryFilter
           styleName="group"
+          isFirstFetchData={isFirstFetchData}
           type={category || dataForInitialize.category}
         />
 
@@ -97,6 +102,7 @@ class Form extends PureComponent {
             min={1000}
             step={500}
             max={maxPrice}
+            isFirstFetchData={isFirstFetchData}
             component={InputRange}
           />
         </fieldset>
@@ -115,9 +121,11 @@ Form.propTypes = {
   initialize: PropTypes.func,
   dataForInitialize: PropTypes.object,
   category: PropTypes.string,
+  isFirstFetchData: PropTypes.bool,
 };
 
 export default reduxForm({
   form: 'search',
-  destroyOnUnmount: false,
+  destroyOnUnmount: true,
+  forceUnregisterOnUnmount: true,
 })(Form);
