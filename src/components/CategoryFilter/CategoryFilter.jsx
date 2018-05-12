@@ -135,7 +135,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
           Тип<br />
           <Field
             styleName={classnames('field', 'select')}
-            name="laptops.camera_type"
+            name="laptops.laptop_type"
             component="select"
           >
             <option value="ultra">Ультрабук</option>
