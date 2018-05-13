@@ -8,6 +8,7 @@ import { push, goBack } from 'react-router-redux';
 import selectors from '_selectors';
 import CloseButton from './CloseButton';
 import getFirstLetterUpper from '_utils/getFirstLetterUpper';
+import Main from './Main';
 
 import styles from './PreviewPage.scss';
 
@@ -51,7 +52,7 @@ class PreviewPage extends PureComponent {
           <div styleName="details">
             <CloseButton onClick={this.handleCloseClisk} />
             <h2 styleName="title">{getFirstLetterUpper(title)}</h2>
-            <img src="https://pp.userapi.com/c543101/v543101324/46b6c/VnUAhmrCUvg.jpg" alt="Salma" />
+            <Main styleName="main" {...data} />
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ const Product = ({
     onClick(id);
   };
 
-  const formatePrice = curPrice => `${splitPrice(curPrice)} р.`;
+  const formatePrice = curPrice => `${splitPrice(curPrice)} ₽.`;
 
   return (
     <div
