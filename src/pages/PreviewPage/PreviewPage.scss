@@ -26,3 +26,14 @@
   position: relative;
   width: 900px;
 }
+
+.title {
+  box-sizing: border-box;
+  flex-basis: 100%;
+  font-size: 32px;
+  letter-spacing: -1px;
+  margin: 0;
+  margin-top: 10px;
+  padding: 0 20px;
+  width: 100%;
+}
