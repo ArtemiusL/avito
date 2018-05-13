@@ -9,16 +9,19 @@ import selectors from '_selectors';
 import CloseButton from './CloseButton';
 import getFirstLetterUpper from '_utils/getFirstLetterUpper';
 import Main from './Main';
+import Aside from './Aside';
 
 import styles from './PreviewPage.scss';
 
 import {
   fetchProducts,
+  fetchSellers,
 } from '_actions/products';
 
 @CSSModules(styles, { allowMultiple: true })
 class PreviewPage extends PureComponent {
   componentDidMount() {
+    this.props.onFetchSellers();
     this.props.onFetchProducts();
   }
 
@@ -40,12 +43,12 @@ class PreviewPage extends PureComponent {
   }
 
   render() {
-    const { className, data, match } = this.props;
+    const { className, data, match, seller } = this.props;
     if (!data) {
       return <div></div>;
     }
     const { title } = data;
-    console.log('data', data, 'match', match);
+    console.log('data', data, 'match', match, 'seller', seller);
     return (
       <div className={className} styleName="root">
         <div styleName="overlay">
@@ -53,6 +56,7 @@ class PreviewPage extends PureComponent {
             <CloseButton onClick={this.handleCloseClisk} />
             <h2 styleName="title">{getFirstLetterUpper(title)}</h2>
             <Main styleName="main" {...data} />
+            <Aside {...data} seller={seller} />
           </div>
         </div>
       </div>
@@ -72,13 +76,22 @@ PreviewPage.propTypes = {
   onPushHistory: PropTypes.func,
 };
 
-const { currentProductSelector } = selectors;
+const { currentProductSelector, currentSellerSelector } = selectors;
 
 const mapStateToProps = (state, ownProps) => {
   const getDataToId = currentProductSelector(ownProps.match.params.id);
+  const curData = getDataToId(state);
+  if (!curData) {
+    return ({
+      data: curData,
+    });
+  }
+  const curSellerId = curData.relationships.seller;
+  const getSellerToId = currentSellerSelector(curSellerId);
 
   return ({
-    data: getDataToId(state),
+    data: curData,
+    seller: getSellerToId(state),
   });
 }
 
@@ -91,6 +104,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onFetchProducts() {
     dispatch(fetchProducts());
+  },
+  onFetchSellers() {
+    dispatch(fetchSellers());
   },
 });
 

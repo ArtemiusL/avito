@@ -19,3 +19,13 @@ export const currentProductSelector = id => {
     products => products.find(item => item.id === id),
   );
 };
+
+export const sellersSelector = createSelector(
+  rootSelector,
+  ({ products }) => products.sellers,
+);
+
+export const currentSellerSelector = id => createSelector(
+  sellersSelector,
+  sellers => sellers.find(item => item.id === id),
+);

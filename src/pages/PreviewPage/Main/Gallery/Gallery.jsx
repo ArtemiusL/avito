@@ -8,7 +8,7 @@ const Gallery = ({ pictures }) => (
   <div styleName="root">
     <img src={pictures[0]} alt="" styleName="preview" />
     <div styleName="thumbnails">
-      {pictures.map((item, index) => (index === 0 ? null : <img src={pictures[index]} alt={`thumbnails item-${index}`} styleName="item" />))}
+      {pictures.map((item, index) => (index === 0 ? null : <img key={pictures[index]} src={pictures[index]} alt={`thumbnails item-${index}`} styleName="item" />))}
     </div>
   </div>
 );

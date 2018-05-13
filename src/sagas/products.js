@@ -1,14 +1,16 @@
-import { takeLatest, all, put, call, select } from 'redux-saga/effects';
+import { takeEvery, all, put, call, select } from 'redux-saga/effects';
 import * as api from '_api/products';
 import selectors from '_selectors';
 
 import {
   fetchProductsSuccess,
   changeFirstFetchData,
+  fetchSellersSuccess,
 } from '_actions/products';
 
 import {
   FETCH_PRODUCTS,
+  FETCH_SELLERS,
 } from '_actions/constants/products';
 
 import {
@@ -37,8 +39,24 @@ export function* fetchProductsSaga() {
   }
 }
 
+export function* fetchSellersSaga() {
+  try {
+    const answer = yield call(api.fetchSellers);
+    const { status, data } = answer;
+
+    if (status === 200) {
+      yield put(fetchSellersSuccess(data.data));
+    } else {
+      throw data;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
 export default function* () {
   yield all([
-    takeLatest(FETCH_PRODUCTS, fetchProductsSaga),
+    takeEvery(FETCH_PRODUCTS, fetchProductsSaga),
+    takeEvery(FETCH_SELLERS, fetchSellersSaga),
   ]);
 }

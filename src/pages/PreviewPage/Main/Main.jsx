@@ -6,7 +6,12 @@ import splitPrice from '_utils/splitOfPrice';
 import Gallery from './Gallery';
 import styles from './Main.scss';
 
-const Main = ({ className, price, pictures }) => {
+const Main = ({
+  className,
+  price,
+  pictures,
+  description,
+}) => {
   const formatePrice = curPrice => `${splitPrice(curPrice)} ₽.`;
 
   return (
@@ -16,6 +21,7 @@ const Main = ({ className, price, pictures }) => {
       <Gallery
         pictures={pictures}
       />
+      <p>{description || 'К сожалению продавец не оставил описание к этому обявлению'}</p>
     </div>
   );
 };
@@ -24,6 +30,7 @@ Main.propTypes = {
   className: PropTypes.string,
   price: PropTypes.number,
   pictures: PropTypes.array,
+  description: PropTypes.string,
 };
 
 export default CSSModules(Main, styles, { allowMultiple: true });
