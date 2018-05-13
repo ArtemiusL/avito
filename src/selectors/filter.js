@@ -21,7 +21,6 @@ export const filteredCategorySelector = createSelector(
   productsSelector,
   filterSelector,
   (products, { category }) => {
-    console.log('category in filter', category);
     if (category === 'all') {
       return [...products];
     } return filters.byCategory([...products], category);

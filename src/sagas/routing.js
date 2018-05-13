@@ -7,10 +7,8 @@ import {
 } from '_actions/filter';
 
 export function* changeLocationSaga() {
-  console.log('дошло до саги');
   const firstFetch = yield select(selectors.isFirstFetchDataSelector);
   const filterData = yield select(selectors.filterSelector);
-  console.log('firstFetch', firstFetch, 'filterData', filterData);
   const data = { ...filterData, ...queryStringToObject(location.search) };
   try {
     if (firstFetch) {

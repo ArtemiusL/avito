@@ -22,13 +22,12 @@ class HomePage extends PureComponent {
   }
 
   handleProductClick = (id) => {
-    console.log(id);
     this.props.onPushHistory(`product/${id}`);
   }
 
   render() {
     const { products } = this.props;
-    console.log('products', products);
+
     return (
       <div>
         <Helmet title="Интернет-магазин" />

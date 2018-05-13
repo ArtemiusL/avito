@@ -1,3 +1,28 @@
 .root {
   font-style: normal;
 }
+
+.overlay {
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  box-sizing: border-box;
+  left: 0;
+  overflow: auto;
+  padding: 50px 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.details {
+  background: #fff;
+  border-radius: 5px;
+  border-top: solid 10px #000;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  width: 900px;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable */
 const getNumberFromResolutions = (resolution) => {
   switch (resolution) {
     case 'HD':
@@ -18,7 +19,6 @@ const getNumberFromResolutions = (resolution) => {
 };
 
 export const auto = (autos, filters) => {
-  console.log('autos', autos, 'filters', filters);
   return (
     autos
       .filter(item => (item.year ? (item.year > filters.year) : true))
@@ -53,7 +53,6 @@ export const laptops = (laptopes, filters) => (
 );
 
 export const byCategory = (products, category) => {
-  console.log('category', category);
   return (products.filter(item => (item.category === category)));
 };
 

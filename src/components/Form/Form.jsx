@@ -34,7 +34,6 @@ const fishRadio = [
 class Form extends PureComponent {
   componentDidMount = () => {
     const { initialize, dataForInitialize } = this.props;
-    console.log('dataForInitialize', dataForInitialize);
     initialize(dataForInitialize);
   }
   render() {
