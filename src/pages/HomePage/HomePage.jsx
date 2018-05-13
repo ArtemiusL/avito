@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
+import selectors from '_selectors';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import LayoutContent from '_components/LayoutContent';
 import FormContainer from '_containers/FormContainer';
 
@@ -19,8 +21,13 @@ class HomePage extends PureComponent {
     this.props.onFetchProducts();
   }
 
+  handleProductClick = (id) => {
+    this.props.onPushHistory(`product/${id}`);
+  }
+
   render() {
     const { products } = this.props;
+
     return (
       <div>
         <Helmet title="Интернет-магазин" />
@@ -28,6 +35,7 @@ class HomePage extends PureComponent {
           leftContent={
             <ProductsList
               data={products}
+              onProductClick={this.handleProductClick}
             />
           }
           rightContent={
@@ -44,15 +52,22 @@ class HomePage extends PureComponent {
 HomePage.propTypes = {
   products: PropTypes.array,
   onFetchProducts: PropTypes.func,
+  onPushHistory: PropTypes.func,
 };
 
+const { sortedProducts } = selectors;
+
 const mapStateToProps = state => ({
-  products: state.products.data,
+  products: sortedProducts(state),
 });
+
 
 const mapDispatchToProps = dispatch => ({
   onFetchProducts() {
     dispatch(fetchProducts());
+  },
+  onPushHistory(params) {
+    dispatch(push(params));
   },
 });
 

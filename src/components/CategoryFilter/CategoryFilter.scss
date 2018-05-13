@@ -1,0 +1,11 @@
+.root {
+  font-size: 18px;
+}
+
+.field {
+  display: inline-block;
+
+  &.select {
+    zoom: 1.5;
+  }
+}

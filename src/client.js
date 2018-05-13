@@ -6,6 +6,7 @@ import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter } from 'react-router-redux';
 import RedBox from 'redbox-react';
 import rootSaga from '_sagas';
+import { LastLocationProvider } from 'react-router-last-location';
 
 import configureStore from '_store';
 
@@ -25,7 +26,9 @@ const renderApp = () => {
     <AppContainer errorReporter={({ error }) => <RedBox error={error} />}>
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <App />
+          <LastLocationProvider>
+            <App />
+          </LastLocationProvider>
         </ConnectedRouter>
       </Provider>
     </AppContainer>,

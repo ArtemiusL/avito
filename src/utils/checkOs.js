@@ -1,5 +1,4 @@
 export default () => {
-  console.log('work');
   let OSName = 'default';
   if (!__SERVER__) {
     if (navigator.userAgent.match(/Android/i)) OSName = 'Android';

@@ -3,14 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from '_components/Form';
 import { queryStringToObject, objectToQueryString } from '_utils/query';
+import { formValueSelector } from 'redux-form';
 import { push } from 'react-router-redux';
 
-const defaultStateForm = {
-  isFavorite: true,
-  category: 'all',
-  sort: 'cheap-first',
-  price: 2000,
-};
+import { changeFilter } from '_actions/filter';
 
 class FormContainer extends PureComponent {
   getInitialValues = () =>
@@ -18,26 +14,36 @@ class FormContainer extends PureComponent {
       { ...defaultStateForm, ...queryStringToObject(location.search) }
     );
   handleSubmit = (values) => {
-    console.log('work');
-    const { onPushHistory, location } = this.props;
+    const { onPushHistory, location, onChangeFilter } = this.props;
     const query = objectToQueryString(values);
 
     onPushHistory({
       ...location,
       search: query,
     });
+
+    onChangeFilter(values);
   }
 
   render() {
-    const { className } = this.props;
-    const initialValues = !__SERVER__ ? this.getInitialValues() : defaultStateForm;
+    const {
+      className,
+      filterValue,
+      maxPrice,
+      category,
+      isFirstFetchData,
+    } = this.props;
+    const initialValues = !__SERVER__ ? this.getInitialValues(filterValue) : filterValue;
+
     return (
       <div>
         <Form
           className={className}
-          test={initialValues}
-          initialValues={initialValues}
+          dataForInitialize={initialValues}
           onSubmit={this.handleSubmit}
+          maxPrice={maxPrice}
+          category={category}
+          isFirstFetchData={isFirstFetchData}
         />
       </div>
     );
@@ -47,13 +53,34 @@ class FormContainer extends PureComponent {
 FormContainer.propTypes = {
   className: PropTypes.string,
   location: PropTypes.any,
+  maxPrice: PropTypes.number,
+  filterValue: PropTypes.object,
+  category: PropTypes.string,
+  isFirstFetchData: PropTypes.bool,
   onPushHistory: PropTypes.func,
+  onChangeFilter: PropTypes.func,
 };
 
+const {
+  filterSelector,
+  maxPriceOfProducts,
+  isFirstFetchDataSelector,
+} = selectors;
+
+const serchFormSelector = formValueSelector('search');
+const mapStateToProps = state => ({
+  filterValue: filterSelector(state),
+  maxPrice: maxPriceOfProducts(state),
+  isFirstFetchData: isFirstFetchDataSelector(state),
+  category: serchFormSelector(state, 'category'),
+});
 
 const mapDispatchToProps = dispatch => ({
   onPushHistory(params) {
     dispatch(push(params));
+  },
+  onChangeFilter(filters) {
+    dispatch(changeFilter(filters));
   },
 });
 

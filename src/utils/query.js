@@ -1,5 +1,12 @@
-import queryString from 'query-string';
+import qs from 'querystrings';
 
-export const objectToQueryString = obj => `?${queryString.stringify(obj)}`;
+export const objectToQueryString = obj => qs.stringify(obj);
 
-export const queryStringToObject = string => queryString.parse(string);
+export const queryStringToObject = (string) => {
+  const newString = string.replace('?', '');
+  const value = qs.parse(newString);
+  if (value[''] === 'undefined') {
+    return {};
+  }
+  return value;
+};
