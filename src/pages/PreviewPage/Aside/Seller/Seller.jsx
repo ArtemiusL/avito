@@ -11,7 +11,7 @@ const ratingList = {
   average: 4,
 };
 
-const Seller = ({ className, seller: { name, rating }  }) => {
+const Seller = ({ className, seller: { name, rating } = { name: 'Без имени', rating: 0 }  }) => {
   const getRating = (curRating) => {
     if (curRating > ratingList.good) {
       return 'rating-good';
