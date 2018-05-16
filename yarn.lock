@@ -1181,7 +1181,7 @@ babel-plugin-transform-react-jsx@^6.24.1:
     babel-plugin-syntax-jsx "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-regenerator@^6.22.0:
+babel-plugin-transform-regenerator@^6.22.0, babel-plugin-transform-regenerator@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-regenerator/-/babel-plugin-transform-regenerator-6.26.0.tgz#e0703696fbde27f0a3efcacf8b4dca2f7b3a8f2f"
   dependencies:
@@ -7505,6 +7505,10 @@ react-dropzone@^4.2.9:
   dependencies:
     attr-accept "^1.0.3"
     prop-types "^15.5.7"
+
+"react-geocode@https://github.com/ArtemiusL/react-geocode/tarball/master":
+  version "0.0.8"
+  resolved "https://github.com/ArtemiusL/react-geocode/tarball/master"
 
 react-google-maps@^9.4.5:
   version "9.4.5"

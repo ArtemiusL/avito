@@ -50,7 +50,7 @@ class PreviewPage extends PureComponent {
     const { title } = data;
     console.log('data', data, 'match', match, 'seller', seller);
     return (
-      <div className={className} styleName="root">
+      <div className={className}>
         <div styleName="overlay">
           <div styleName="details">
             <CloseButton onClick={this.handleCloseClisk} />
@@ -68,6 +68,22 @@ PreviewPage.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
     title: PropTypes.string,
+    price: PropTypes.number,
+    address: PropTypes.object,
+    year: PropTypes.number,
+    pictures: PropTypes.array,
+    address: PropTypes.shape({
+      lat: PropTypes.number,
+      lng: PropTypes.number,
+    }),
+    id: PropTypes.string,
+  }),
+  seller: PropTypes.shape({
+    category: PropTypes.string,
+    isCompany: PropTypes.bool,
+    name: PropTypes.string,
+    rating: PropTypes.number,
+    id: PropTypes.string,
   }),
   location: PropTypes.object,
   lastLocation: PropTypes.object,
