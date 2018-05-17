@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
 import Geocode from 'react-geocode';
@@ -7,17 +7,19 @@ import Seller from './Seller';
 import Map from './Map';
 import styles from './Aside.scss';
 
-class Aside extends PureComponent {
+class Aside extends Component {
+  state = {
+    addressAd: '',
+  }
   componentDidMount = () => {
-    console.log(GOOGLE_MAPS_API_KEY);
     const { lat, lng } = this.props.address;
-    console.log('Geocode.setApiKey', Geocode.setApiKey);
-    console.log('Geocode', Geocode);
     Geocode.setApiKey(GOOGLE_MAPS_API_KEY);
-    Geocode.fromLatLng(lat, lng).then(
+    Geocode.fromLatLng(lat, lng, 'ru').then(
       (response) => {
         const address = response.results[0].formatted_address;
-        console.log(address);
+        this.setState({
+          addressAd: address,
+        });
       },
       (error) => {
         console.error(error);
@@ -26,14 +28,17 @@ class Aside extends PureComponent {
   }
   render() {
     const { className, seller, address } = this.props;
+    const { addressAd } = this.state;
 
     return (
       <div className={className} styleName="root">
-        <Map
-          styleName="map"
-          isMarkerShown
-          address={address}
-        />
+        <section styleName="address">
+          {addressAd && <p styleName="addressText">{addressAd }</p> }
+          <Map
+            isMarkerShown
+            address={address}
+          />
+        </section>
         <Seller seller={seller} />
       </div>
     );

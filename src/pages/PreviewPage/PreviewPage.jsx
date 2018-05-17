@@ -48,7 +48,7 @@ class PreviewPage extends PureComponent {
       return <div></div>;
     }
     const { title } = data;
-    console.log('data', data, 'match', match, 'seller', seller);
+
     return (
       <div className={className}>
         <div styleName="overlay">
