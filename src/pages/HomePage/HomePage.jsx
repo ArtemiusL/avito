@@ -10,6 +10,7 @@ import FormContainer from '_containers/FormContainer';
 
 import {
   fetchProducts,
+  addProductInFavorite,
 } from '_actions/products';
 
 import ProductsList from './ProductsList';
@@ -25,8 +26,12 @@ class HomePage extends PureComponent {
     this.props.onPushHistory(`product/${id}`);
   }
 
+  handleHeartClick = (id) => {
+    this.props.onProductHeartClick(id);
+  }
+
   render() {
-    const { products } = this.props;
+    const { products, favoriteList } = this.props;
 
     return (
       <div>
@@ -35,7 +40,9 @@ class HomePage extends PureComponent {
           leftContent={
             <ProductsList
               data={products}
+              favoriteList={favoriteList}
               onProductClick={this.handleProductClick}
+              onHeartClick={this.handleHeartClick}
             />
           }
           rightContent={
@@ -51,14 +58,17 @@ class HomePage extends PureComponent {
 
 HomePage.propTypes = {
   products: PropTypes.array,
+  favoriteList: PropTypes.array,
   onFetchProducts: PropTypes.func,
   onPushHistory: PropTypes.func,
+  onProductHeartClick: PropTypes.func,
 };
 
-const { sortedProducts } = selectors;
+const { sortedProducts, favoriteProductsSelector } = selectors;
 
 const mapStateToProps = state => ({
   products: sortedProducts(state),
+  favoriteList: favoriteProductsSelector(state),
 });
 
 
@@ -68,6 +78,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onPushHistory(params) {
     dispatch(push(params));
+  },
+  onProductHeartClick(id) {
+    dispatch(addProductInFavorite(id));
   },
 });
 

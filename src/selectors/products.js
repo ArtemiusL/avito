@@ -8,6 +8,11 @@ export const productsSelector = createSelector(
   ({ products }) => products.data,
 );
 
+export const favoriteProductsSelector = createSelector(
+  rootSelector,
+  ({ products }) => products.favoriteDataIds,
+);
+
 export const isFirstFetchDataSelector = createSelector(
   rootSelector,
   ({ products }) => products.isFirstFetchData,

@@ -12,13 +12,16 @@ const Main = ({
   pictures,
   description,
 }) => {
-  const formatePrice = curPrice => `${splitPrice(curPrice)} ₽.`;
+  const formatePrice = curPrice => `${splitPrice(curPrice)} ₽`;
 
   return (
     <div className={className} styleName="root">
-      <p styleName="date">три дня назад</p>
-      <p styleName="price">{formatePrice(price)}</p>
+      <div styleName="priceAndDate">
+        <p styleName="date">три дня назад</p>
+        <p styleName="price">{formatePrice(price)}</p>
+      </div>
       <Gallery
+        styleName="gallery"
         pictures={pictures}
       />
       <p>{description || 'К сожалению продавец не оставил описание к этому обявлению'}</p>

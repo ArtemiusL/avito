@@ -1,6 +1,7 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import splitPrice from '_utils/splitOfPrice';
 import styles from './Product.scss';
 
@@ -13,26 +14,42 @@ const Product = ({
   year,
   pictures,
   onClick,
+  onHeartClick,
+  favorite,
 }) => {
   const handleClick = () => {
     onClick(id);
   };
 
+  const handleHeartClick = () => {
+    onHeartClick(id);
+  };
+
   const formatePrice = curPrice => `${splitPrice(curPrice)} ₽.`;
 
+  console.log('favorite in Product', favorite);
   return (
     <div
       className={className}
       styleName="root"
-      onClick={handleClick}
     >
       <picture styleName="product-pic">
         <span styleName="product-pic-number">{pictures.length}</span>
         <img src={pictures[0]} alt="ads" width="120" />
       </picture>
       <div styleName="product-description">
-        <button styleName="product-favorite">Добавить в избранное</button>
-        <h3 styleName="product-title"><span>{title}</span></h3>
+        <button
+          styleName={classnames('product-favorite', { active: favorite })}
+          onClick={handleHeartClick}
+        >
+          Добавить в избранное
+        </button>
+        <h3
+          styleName="product-title"
+          onClick={handleClick}
+        >
+          <span>{title}</span>
+        </h3>
         <p styleName="product-price">{formatePrice(price)}</p>
         <p styleName="product-address">{lat}</p>
         <p styleName="product-date">{year}</p>
@@ -50,6 +67,8 @@ Product.propTypes = {
   pictures: PropTypes.array,
   id: PropTypes.string,
   onClick: PropTypes.func,
+  onHeartClick: PropTypes.func,
+  favorite: PropTypes.bool,
 };
 
 export default CSSModules(Product, styles, { allowMultiple: true });
