@@ -3,6 +3,7 @@ import {
   CHANGE_FIRST_FETCH_DATA,
   FETCH_SELLERS_SUCCESS,
   ADD_IN_FAVORITE,
+  CHANGE_FAVORITE_LIST,
 } from '_actions/constants/products';
 
 const initialState = {
@@ -26,7 +27,10 @@ export default (state = initialState, action) => {
       return { ...state, sellers: payload };
 
     case ADD_IN_FAVORITE:
-      return { ...state, favoriteDataIds: [...state.favoriteDataIds, action.id] };
+      return { ...state, favoriteDataIds: [...state.favoriteDataIds, payload] };
+
+    case CHANGE_FAVORITE_LIST:
+      return { ...state, favoriteDataIds: payload };
 
     default:
       return state;

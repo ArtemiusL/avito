@@ -27,7 +27,6 @@ const Product = ({
 
   const formatePrice = curPrice => `${splitPrice(curPrice)} ₽.`;
 
-  console.log('favorite in Product', favorite);
   return (
     <div
       className={className}

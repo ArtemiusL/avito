@@ -5,6 +5,7 @@ import {
   FETCH_SELLERS,
   FETCH_SELLERS_SUCCESS,
   ADD_IN_FAVORITE,
+  CHANGE_FAVORITE_LIST,
 } from './constants/products';
 
 export const fetchProducts = () => ({
@@ -29,7 +30,12 @@ export const fetchSellersSuccess = payload => ({
   payload,
 });
 
-export const addProductInFavorite = id => ({
+export const addProductInFavorite = payload => ({
   type: ADD_IN_FAVORITE,
-  id,
+  payload,
+});
+
+export const changeFavoriteList = payload => ({
+  type: CHANGE_FAVORITE_LIST,
+  payload,
 });

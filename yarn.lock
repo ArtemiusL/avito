@@ -2295,7 +2295,7 @@ cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
 
-cookie@0.3.1:
+cookie@0.3.1, cookie@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
@@ -7287,6 +7287,14 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
+prop-types@^15.0.0, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.1:
+  version "15.6.1"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 prop-types@^15.5.10, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
@@ -7301,14 +7309,6 @@ prop-types@^15.5.4:
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
-
-prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.1:
-  version "15.6.1"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
-  dependencies:
-    fbjs "^0.8.16"
-    loose-envify "^1.3.1"
-    object-assign "^4.1.1"
 
 propagate@0.4.0:
   version "0.4.0"
@@ -7478,6 +7478,14 @@ react-addons-css-transition-group@^15.6.2:
   dependencies:
     react-transition-group "^1.2.0"
 
+react-cookie@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-2.1.5.tgz#c192aa3d1edf75f10d967c4e060b797775989946"
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+    prop-types "^15.0.0"
+    universal-cookie "^2.1.5"
+
 react-css-modules@^4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/react-css-modules/-/react-css-modules-4.7.2.tgz#3ded05fc8b5f2879d19131aa850cb6b2b8ca4f0b"
@@ -7508,7 +7516,7 @@ react-dropzone@^4.2.9:
 
 react-geocode@^0.0.9:
   version "0.0.9"
-  resolved "https://github.com/ArtemiusL/react-geocode/tarball/master"
+  resolved "https://registry.yarnpkg.com/react-geocode/-/react-geocode-0.0.9.tgz#e2c805a680e6809330715aa506c8a2bcf411a41c"
 
 react-google-maps@^9.4.5:
   version "9.4.5"
@@ -9448,6 +9456,19 @@ unist-util-visit@^1.1.0:
   resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-1.2.0.tgz#9dc78d1f95cd242e865f7f93f327d3296bb9a718"
   dependencies:
     unist-util-is "^2.1.1"
+
+universal-cookie-express@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/universal-cookie-express/-/universal-cookie-express-2.1.5.tgz#50c243a7985a5022784edea14f84b0845c1e13a5"
+  dependencies:
+    universal-cookie "^2.1.5"
+
+universal-cookie@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-2.1.5.tgz#d6cfcd57f0e753acaaf99cd5517c5f1718316fc1"
+  dependencies:
+    cookie "^0.3.1"
+    object-assign "^4.1.0"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"

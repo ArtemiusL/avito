@@ -16,7 +16,7 @@ const ProductsList = ({
     {data.length !== 0 && data.map((item) => {
       const isFavorite = favoriteList.length !== 0 &&
        favoriteList.some(favItem => favItem === item.id);
-      console.log('isFavorite', isFavorite);
+
       return (
         <Product
           key={item.id}

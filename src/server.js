@@ -22,9 +22,14 @@ import App from './containers/App';
 import routes from './routes';
 import { port, host } from './config';
 
+import { changeFavoriteList } from '_actions/products';
+
 const app = express();
 const mailer = sendmail();
 
+const cookiesMiddleware = require('universal-cookie-express');
+
+app.use(cookiesMiddleware());
 // Using helmet to secure Express with various HTTP headers
 app.use(helmet());
 // Prevent HTTP parameter pollution.
@@ -93,6 +98,10 @@ app.get('*', (req, res) => {
 
   (async () => {
     try {
+      const { favoriteList } = req.universalCookies.cookies;
+      if (favoriteList) {
+        store.dispatch(changeFavoriteList(JSON.parse(favoriteList)));
+      }
       // Load data from server-side first
       await loadBranchData();
 

@@ -231,6 +231,7 @@
     "querystrings": "^0.4.0",
     "react": "16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-cookie": "^2.1.5",
     "react-css-modules": "^4.7.2",
     "react-dom": "16.2.0",
     "react-dropzone": "^4.2.9",
@@ -257,6 +258,7 @@
     "serve-favicon": "2.4.5",
     "shipit-cli": "^4.0.2",
     "shipit-deploy": "^4.0.2",
+    "universal-cookie-express": "^2.1.5",
     "webpack-isomorphic-tools": "^3.0.5"
   },
   "devDependencies": {
