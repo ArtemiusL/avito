@@ -1,0 +1,13 @@
+.inputContainer {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.value {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
