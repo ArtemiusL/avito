@@ -11,26 +11,29 @@ const InputRange = ({
   min,
   max,
   step,
-}) => (
-  <div>
-    <span>{min}</span>
-    <div styleName="inputContainer">
-      <input
-        className={className}
-        value={isFirstFetchData ? max : value}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        onChange={onChange}
-      />
-      <div styleName="value">
-        {isFirstFetchData ? max : value}
+}) => {
+  const inputValue = isFirstFetchData ? max : value;
+  return (
+    <div>
+      <span>{min}</span>
+      <div styleName="inputContainer">
+        <input
+          className={className}
+          value={inputValue}
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          onChange={onChange}
+        />
+        <div styleName="value">
+          {inputValue}
+        </div>
       </div>
+      <span>{max}</span>
     </div>
-    <span>{max}</span>
-  </div>
-);
+  );
+};
 
 InputRange.propTypes = {
   className: PropTypes.string,
