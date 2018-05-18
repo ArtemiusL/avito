@@ -20,6 +20,7 @@ import {
   changeFilter,
 } from '_actions/filter';
 
+const EXPIRE_COOKIE = new Date(Date.now() + (1000 * 3600 * 24 * 30));
 const cookies = new Cookies();
 
 export function* fetchProductsSaga() {
@@ -45,13 +46,20 @@ export function* fetchProductsSaga() {
 }
 // eslint-disable-next-line
 export function* addInFavoriteSaga(action) {
-  console.log('Дошло до саги action', action);
   const favoriteList = cookies.get(FAVORITE_LIST);
   cookies.remove(FAVORITE_LIST);
   if (favoriteList) {
-    cookies.set(FAVORITE_LIST, JSON.stringify([...favoriteList, action.payload]));
+    cookies.set(
+      FAVORITE_LIST,
+      JSON.stringify([...favoriteList, action.payload]),
+      { expires: EXPIRE_COOKIE },
+    );
   } else {
-    cookies.set(FAVORITE_LIST, JSON.stringify([action.payload]));
+    cookies.set(
+      FAVORITE_LIST,
+      JSON.stringify([action.payload]),
+      { expires: EXPIRE_COOKIE },
+    );
   }
 }
 
