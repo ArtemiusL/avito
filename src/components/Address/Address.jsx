@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Geocode from 'react-geocode';
+import Geocode from 'react-geocode-bet';
 import { GOOGLE_MAPS_API_KEY } from '_constants';
 
 class Address extends Component {
