@@ -7475,7 +7475,7 @@ react-dropzone@^4.2.9:
     attr-accept "^1.0.3"
     prop-types "^15.5.7"
 
-react-geocode@^0.0.9:
+"react-geocode@https://github.com/ArtemiusL/react-geocode/tarball/master":
   version "0.0.8"
   resolved "https://github.com/ArtemiusL/react-geocode/tarball/master"
 
