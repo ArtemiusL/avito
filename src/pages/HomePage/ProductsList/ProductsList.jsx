@@ -11,24 +11,31 @@ const ProductsList = ({
   favoriteList,
   onProductClick,
   onHeartClick,
+  isFetchData,
 }) => (
   <div className={className}>
-    {data.length !== 0 ? (
-      data.map((item) => {
-      const isFavorite = favoriteList.length !== 0 &&
-       favoriteList.some(favItem => favItem === item.id);
+    {data.length !== 0 && (
+        data.map((item) => {
+        const isFavorite = favoriteList.length !== 0 &&
+         favoriteList.some(favItem => favItem === item.id);
 
-      return (
-        <Product
-          key={item.id}
-          onClick={onProductClick}
-          favorite={isFavorite}
-          onHeartClick={onHeartClick}
-          styleName="products-list-item"
-          {...item}
-        />
-      );
-    })) : (
+        return (
+          <Product
+            key={item.id}
+            onClick={onProductClick}
+            favorite={isFavorite}
+            onHeartClick={onHeartClick}
+            styleName="products-list-item"
+            {...item}
+          />
+        );
+      }))
+    }
+    {data.length === 0 && isFetchData && (
+      <h2>Идёт загрузка секунду терпения</h2>
+   )}
+    {
+      data.length === 0 && !isFetchData && (
       <h2>
         К сожалению обявлений не найдено.
         Попробуйте ещё раз вдруг вам повезет!
@@ -43,6 +50,7 @@ ProductsList.propTypes = {
   favoriteList: PropTypes.array,
   onProductClick: PropTypes.func,
   onHeartClick: PropTypes.func,
+  isFetchData: PropTypes.bool,
 };
 
 export default CSSModules(ProductsList, styles, { allowMultiple: true });

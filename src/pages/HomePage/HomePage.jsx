@@ -31,7 +31,11 @@ class HomePage extends PureComponent {
   }
 
   render() {
-    const { products, favoriteList } = this.props;
+    const {
+      products,
+      favoriteList,
+      isFetchData,
+    } = this.props;
 
     return (
       <div>
@@ -43,6 +47,7 @@ class HomePage extends PureComponent {
               favoriteList={favoriteList}
               onProductClick={this.handleProductClick}
               onHeartClick={this.handleHeartClick}
+              isFetchData={isFetchData}
             />
           }
           rightContent={
@@ -62,13 +67,19 @@ HomePage.propTypes = {
   onFetchProducts: PropTypes.func,
   onPushHistory: PropTypes.func,
   onProductHeartClick: PropTypes.func,
+  isFetchData: PropTypes.bool,
 };
 
-const { sortedProducts, favoriteProductsSelector } = selectors;
+const {
+  sortedProducts,
+  favoriteProductsSelector,
+  isFetchDataSelector,
+} = selectors;
 
 const mapStateToProps = state => ({
   products: sortedProducts(state),
   favoriteList: favoriteProductsSelector(state),
+  isFetchData: isFetchDataSelector(state),
 });
 
 

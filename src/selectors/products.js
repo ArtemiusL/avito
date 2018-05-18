@@ -18,6 +18,11 @@ export const isFirstFetchDataSelector = createSelector(
   ({ products }) => products.isFirstFetchData,
 );
 
+export const isFetchDataSelector = createSelector(
+  rootSelector,
+  ({ products }) => products.isFetchData,
+);
+
 export const currentProductSelector = id => {
   return createSelector(
     productsSelector,

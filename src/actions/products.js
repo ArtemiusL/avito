@@ -6,6 +6,7 @@ import {
   FETCH_SELLERS_SUCCESS,
   TOGGLE_IN_FAVORITE,
   CHANGE_FAVORITE_LIST,
+  CHANGE_IS_FETCH_DATA,
 } from './constants/products';
 
 export const fetchProducts = () => ({
@@ -38,4 +39,8 @@ export const toggleProductInFavorite = payload => ({
 export const changeFavoriteList = payload => ({
   type: CHANGE_FAVORITE_LIST,
   payload,
+});
+
+export const changeIsFetchData = () => ({
+  type: CHANGE_IS_FETCH_DATA,
 });

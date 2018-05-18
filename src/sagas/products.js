@@ -8,6 +8,7 @@ import {
   fetchProductsSuccess,
   changeFirstFetchData,
   fetchSellersSuccess,
+  changeIsFetchData,
 } from '_actions/products';
 
 import {
@@ -24,6 +25,7 @@ const EXPIRE_COOKIE = new Date(Date.now() + (1000 * 3600 * 24 * 30));
 const cookies = new Cookies();
 
 export function* fetchProductsSaga() {
+  yield put(changeIsFetchData());
   const firstFetch = yield select(selectors.isFirstFetchDataSelector);
   try {
     const answer = yield call(api.fetchProducts);

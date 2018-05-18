@@ -4,6 +4,7 @@ import {
   FETCH_SELLERS_SUCCESS,
   TOGGLE_IN_FAVORITE,
   CHANGE_FAVORITE_LIST,
+  CHANGE_IS_FETCH_DATA,
 } from '_actions/constants/products';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   isFirstFetchData: true,
   sellers: [],
   favoriteDataIds: [],
+  isFetchData: false,
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +39,9 @@ export default (state = initialState, action) => {
 
     case CHANGE_FAVORITE_LIST:
       return { ...state, favoriteDataIds: payload };
+
+    case CHANGE_IS_FETCH_DATA:
+      return { ...state, isFetchData: !state.isFetchData };
 
     default:
       return state;
