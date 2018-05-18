@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
@@ -6,17 +5,19 @@ import { connect } from 'react-redux';
 import { withLastLocation } from 'react-router-last-location';
 import { push, goBack } from 'react-router-redux';
 import selectors from '_selectors';
-import CloseButton from './CloseButton';
 import getFirstLetterUpper from '_utils/getFirstLetterUpper';
-import Main from './Main';
-import Aside from './Aside';
-
-import styles from './PreviewPage.scss';
 
 import {
   fetchProducts,
   fetchSellers,
 } from '_actions/products';
+
+import CloseButton from './CloseButton';
+import Main from './Main';
+import Aside from './Aside';
+
+import styles from './PreviewPage.scss';
+
 
 @CSSModules(styles, { allowMultiple: true })
 class PreviewPage extends PureComponent {
@@ -43,9 +44,14 @@ class PreviewPage extends PureComponent {
   }
 
   render() {
-    const { className, data, match, seller } = this.props;
+    const {
+      className,
+      data,
+      seller,
+    } = this.props;
+
     if (!data) {
-      return <div></div>;
+      return <div />;
     }
     const { title } = data;
 
@@ -69,7 +75,6 @@ PreviewPage.propTypes = {
   data: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
-    address: PropTypes.object,
     year: PropTypes.number,
     pictures: PropTypes.array,
     address: PropTypes.shape({
@@ -89,7 +94,8 @@ PreviewPage.propTypes = {
   lastLocation: PropTypes.object,
   onPushHistory: PropTypes.func,
   onGoBack: PropTypes.func,
-  onPushHistory: PropTypes.func,
+  onFetchSellers: PropTypes.func,
+  onFetchProducts: PropTypes.func,
 };
 
 const { currentProductSelector, currentSellerSelector } = selectors;
@@ -109,7 +115,7 @@ const mapStateToProps = (state, ownProps) => {
     data: curData,
     seller: getSellerToId(state),
   });
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   onPushHistory(params) {

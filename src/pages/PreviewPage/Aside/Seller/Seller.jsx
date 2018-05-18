@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
@@ -11,28 +10,30 @@ const ratingList = {
   average: 4,
 };
 
-const Seller = ({ className, seller: { name, rating } = { name: 'Без имени', rating: 0 }  }) => {
+const Seller = ({ className, seller: { name, rating } = { name: 'Без имени', rating: 0 } }) => {
   const getRating = (curRating) => {
     if (curRating > ratingList.good) {
       return 'rating-good';
     } else if (curRating > ratingList.average) {
       return 'rating-average';
     } return 'rating-bad';
-  }
+  };
+
   const ratingClass = getRating(rating);
+
   return (
     <div className={className} styleName="root">
-      <a href="#">
+      <a href="/#">
         <h3 styleName="name">{name}</h3>
       </a>
 
       <p styleName={classnames('rating', ratingClass)}>
         рейтинг <span styleName="rating-val">{rating}</span>
-        <a href="#">Отзывы</a>
+        <a href="/#">Отзывы</a>
       </p>
     </div>
   );
-}
+};
 
 Seller.propTypes = {
   className: PropTypes.string,
