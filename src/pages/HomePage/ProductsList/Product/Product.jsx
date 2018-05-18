@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import splitPrice from '_utils/splitOfPrice';
+import Address from '_components/Address';
 import styles from './Product.scss';
 
 const Product = ({
@@ -10,7 +11,7 @@ const Product = ({
   id,
   title,
   price,
-  address: { lat },
+  address,
   year,
   pictures,
   onClick,
@@ -50,7 +51,9 @@ const Product = ({
           <span>{title}</span>
         </h3>
         <p styleName="product-price">{formatePrice(price)}</p>
-        <p styleName="product-address">{lat}</p>
+        <p styleName="product-address">
+          <Address address={address} />
+        </p>
         <p styleName="product-date">{year}</p>
       </div>
     </div>
