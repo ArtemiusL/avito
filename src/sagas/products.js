@@ -35,6 +35,7 @@ export function* fetchProductsSaga() {
       yield put(fetchProductsSuccess(data.data));
       const maxPriceOfProducts = yield select(selectors.maxPriceOfProducts);
       yield put(changeFilter({ price: maxPriceOfProducts }));
+      yield put(changeIsFetchData());
 
       if (firstFetch) {
         yield put(changeFirstFetchData());

@@ -32,7 +32,10 @@ const ProductsList = ({
       }))
     }
     {data.length === 0 && isFetchData && (
-      <h2>Идёт загрузка секунду терпения</h2>
+      <div styleName="fetchContainer">
+        <h2>Идёт загрузка секунду терпения</h2>
+        <div styleName="preloader" />
+      </div>
    )}
     {
       data.length === 0 && !isFetchData && (

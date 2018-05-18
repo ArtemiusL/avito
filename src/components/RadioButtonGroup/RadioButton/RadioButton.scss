@@ -1,5 +1,4 @@
 @import '~styles/variables';
-@import '~styles/mixins';
 
 .root {
   border-radius: 3px;
@@ -11,10 +10,10 @@
 
   &:hover,
   &.active {
-    background: #333;
-    color: #fff;
+    background: $color-mine-shaft;
+    color: $color-white;
     text-decoration: none;
-    text-decoration-color: #999;
+    text-decoration-color: $color-dusty-gray;
   }
 
   &.disabled {
@@ -27,10 +26,10 @@
       text-decoration-color: inherit;
 
       &.active {
-        background: #333;
-        color: #fff;
+        background: $color-mine-shaft;
+        color: $color-white;
         text-decoration: none;
-        text-decoration-color: #999;
+        text-decoration-color: $color-dusty-gray;
       }
     }
   }
