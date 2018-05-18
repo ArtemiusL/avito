@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import orderBy from 'lodash/fp/orderBy';
 
 import { rootSelector } from './common';
-import { productsSelector } from './products';
+import { productsSelector, favoriteProductsSelector } from './products';
 
 import * as filters from './filters';
 
@@ -17,31 +17,38 @@ export const categoryFilterSelector = createSelector(
   ({ category }) => category,
 );
 
+export const isFavoriteFilterSelector = createSelector(
+  filterSelector,
+  ({ isFavorite }) => isFavorite,
+);
+
 export const filteredCategorySelector = createSelector(
   productsSelector,
   filterSelector,
-  (products, { category }) => {
-    if (category === 'all') {
-      return [...products];
-    } return filters.byCategory([...products], category);
+  (products, { category, isFavorite }) => {
+    if (isFavorite) return products;
+    else if (category === 'all') return products;
+    return filters.byCategory([...products], category);
   },
 );
 
 export const filteredCurrentCategorySelector = createSelector(
   filteredCategorySelector,
   filterSelector,
-  (products, productfilters) => {
-    const { category } = productfilters;
-    return (
+  favoriteProductsSelector,
+  (products, productfilters, favoriteList) => {
+    const { isFavorite, category } = productfilters
+    const filteredArray =  (
       category === 'all' ? [...products] : filters[category]([...products], productfilters[category])
     );
+    return isFavorite ? products.filter(item => favoriteList.some(favItem => favItem === item.id)) : filteredArray;
   },
 );
 
 export const filteredByPriceSelector = createSelector(
   filteredCurrentCategorySelector,
   filterSelector,
-  (products, { price }) => (filters.byPrice([...products], price)),
+  (products, { price, isFavorite }) => isFavorite ? products : (filters.byPrice([...products], price)),
 );
 
 export const sortedProducts = createSelector(

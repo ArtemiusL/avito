@@ -10,6 +10,7 @@ import FormContainer from '_containers/FormContainer';
 
 import {
   fetchProducts,
+  toggleProductInFavorite,
 } from '_actions/products';
 
 import ProductsList from './ProductsList';
@@ -25,8 +26,16 @@ class HomePage extends PureComponent {
     this.props.onPushHistory(`product/${id}`);
   }
 
+  handleHeartClick = (id) => {
+    this.props.onProductHeartClick(id);
+  }
+
   render() {
-    const { products } = this.props;
+    const {
+      products,
+      favoriteList,
+      isFetchData,
+    } = this.props;
 
     return (
       <div>
@@ -35,7 +44,10 @@ class HomePage extends PureComponent {
           leftContent={
             <ProductsList
               data={products}
+              favoriteList={favoriteList}
               onProductClick={this.handleProductClick}
+              onHeartClick={this.handleHeartClick}
+              isFetchData={isFetchData}
             />
           }
           rightContent={
@@ -51,14 +63,23 @@ class HomePage extends PureComponent {
 
 HomePage.propTypes = {
   products: PropTypes.array,
+  favoriteList: PropTypes.array,
   onFetchProducts: PropTypes.func,
   onPushHistory: PropTypes.func,
+  onProductHeartClick: PropTypes.func,
+  isFetchData: PropTypes.bool,
 };
 
-const { sortedProducts } = selectors;
+const {
+  sortedProducts,
+  favoriteProductsSelector,
+  isFetchDataSelector,
+} = selectors;
 
 const mapStateToProps = state => ({
   products: sortedProducts(state),
+  favoriteList: favoriteProductsSelector(state),
+  isFetchData: isFetchDataSelector(state),
 });
 
 
@@ -68,6 +89,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onPushHistory(params) {
     dispatch(push(params));
+  },
+  onProductHeartClick(id) {
+    dispatch(toggleProductInFavorite(id));
   },
 });
 

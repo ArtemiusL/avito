@@ -32,6 +32,7 @@ class FormContainer extends PureComponent {
       maxPrice,
       category,
       isFirstFetchData,
+      isFavoriteFilter,
     } = this.props;
     const initialValues = !__SERVER__ ? this.getInitialValues(filterValue) : filterValue;
 
@@ -44,6 +45,7 @@ class FormContainer extends PureComponent {
           maxPrice={maxPrice}
           category={category}
           isFirstFetchData={isFirstFetchData}
+          isFavoriteFilter={isFavoriteFilter}
         />
       </div>
     );
@@ -57,6 +59,7 @@ FormContainer.propTypes = {
   filterValue: PropTypes.object,
   category: PropTypes.string,
   isFirstFetchData: PropTypes.bool,
+  isFavoriteFilter: PropTypes.bool,
   onPushHistory: PropTypes.func,
   onChangeFilter: PropTypes.func,
 };
@@ -73,6 +76,7 @@ const mapStateToProps = state => ({
   maxPrice: maxPriceOfProducts(state),
   isFirstFetchData: isFirstFetchDataSelector(state),
   category: serchFormSelector(state, 'category'),
+  isFavoriteFilter: serchFormSelector(state, 'isFavorite'),
 });
 
 const mapDispatchToProps = dispatch => ({

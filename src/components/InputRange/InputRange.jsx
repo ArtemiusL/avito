@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CSSModules from 'react-css-modules';
+
+import styles from './InputRange.scss';
 
 const InputRange = ({
   className,
@@ -8,21 +11,31 @@ const InputRange = ({
   min,
   max,
   step,
-}) => (
-  <div>
-    <span>{min}</span>
-    <input
-      className={className}
-      value={isFirstFetchData ? max : value}
-      type="range"
-      min={min}
-      max={max}
-      step={step}
-      onChange={onChange}
-    />
-    <span>{max}</span>
-  </div>
-);
+  disabled,
+}) => {
+  const inputValue = isFirstFetchData ? max : value;
+  return (
+    <div>
+      <span>{min}</span>
+      <div styleName="inputContainer">
+        <input
+          className={className}
+          value={inputValue}
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          disabled={disabled}
+          onChange={onChange}
+        />
+        <div styleName="value">
+          {inputValue}
+        </div>
+      </div>
+      <span>{max}</span>
+    </div>
+  );
+};
 
 InputRange.propTypes = {
   className: PropTypes.string,
@@ -33,6 +46,7 @@ InputRange.propTypes = {
     onChange: PropTypes.func,
   }),
   isFirstFetchData: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
-export default InputRange;
+export default CSSModules(InputRange, styles, { allowMultiple: true });

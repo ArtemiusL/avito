@@ -1,4 +1,3 @@
-/* eslint-disable */
 const getNumberFromResolutions = (resolution) => {
   switch (resolution) {
     case 'HD':
@@ -18,26 +17,24 @@ const getNumberFromResolutions = (resolution) => {
   }
 };
 
-export const auto = (autos, filters) => {
-  return (
-    autos
-      .filter(item => (item.year ? (item.year > filters.year) : true))
-      .filter(item => (item.gearbox ? item.gearbox === filters.gearbox : true))
-      .filter(item => (item.body_type ? item.body_type === filters.body_type : true))
-  );
-};
+export const auto = (autos, filters) => (
+  autos
+    .filter(item => (Number(item.year) > Number(filters.year)))
+    .filter(item => (item.gearbox === filters.gearbox))
+    .filter(item => (item.body_type === filters.body_type))
+);
 
 export const immovable = (immovableses, filters) => (
   immovableses
     .filter(item => (item.property_type === filters.property_type))
-    .filter(item => (item.square > filters.square))
-    .filter(item => (item.rooms === filters.rooms))
+    .filter(item => (Number(item.square) > Number(filters.square)))
+    .filter(item => (Number(item.rooms) === Number(filters.rooms)))
 );
 
 export const cameras = (camerases, filters) => (
   camerases
     .filter(item => item.camera_type === filters.camera_type)
-    .filter(item => item.matrix_resolution > filters.matrix_resolution)
+    .filter(item => Number(item.matrix_resolution) > Number(filters.matrix_resolution))
     .filter(item =>
       getNumberFromResolutions(item.video_resolution) >
       getNumberFromResolutions(filters.video_resolution),
@@ -52,9 +49,9 @@ export const laptops = (laptopes, filters) => (
     .filter(item => item.processor === filters.processor)
 );
 
-export const byCategory = (products, category) => {
-  return (products.filter(item => (item.category === category)));
-};
+export const byCategory = (products, category) => (
+  products.filter(item => (item.category === category))
+);
 
 export const byPrice = (products, price) => (products.filter(
-  item => (item.price ? item.price < price : true)));
+  item => (item.price ? Number(item.price) < Number(price) : true)));

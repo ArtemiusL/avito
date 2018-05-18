@@ -7,18 +7,28 @@ import styles from './RadioButton.scss';
 
 class RadioButton extends Component {
   handleClick = () => {
-    const { id, value, onClick } = this.props;
+    const {
+      id,
+      value,
+      disabled,
+      onClick,
+    } = this.props;
 
-    onClick(id, value);
+    if (!disabled) onClick(id, value);
   };
 
   render() {
-    const { className, title, isActive } = this.props;
+    const {
+      className,
+      title,
+      isActive,
+      disabled,
+    } = this.props;
 
     return (
       <li
         className={className}
-        styleName={classnames('root', { active: isActive })}
+        styleName={classnames('root', { active: isActive, disabled })}
         onClick={this.handleClick}
       >
         {title}
@@ -33,6 +43,7 @@ RadioButton.propTypes = {
   value: PropTypes.any,
   title: PropTypes.string,
   isActive: PropTypes.bool,
+  disabled: PropTypes.bool,
   onClick: PropTypes.func,
 };
 

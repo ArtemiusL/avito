@@ -3,7 +3,6 @@ import morgan from 'morgan';
 import express from 'express';
 import compression from 'compression';
 import helmet from 'helmet';
-import formidable from 'express-formidable';
 import hpp from 'hpp';
 import favicon from 'serve-favicon';
 import React from 'react';
@@ -14,17 +13,21 @@ import { all, fork, join } from 'redux-saga/effects';
 import chalk from 'chalk';
 import _ from 'lodash/fp';
 
+import { changeFavoriteList } from '_actions/products';
+
 import createHistory from 'history/createMemoryHistory';
 import configureStore from '_store';
-import sendmail from 'sendmail';
 import Html from './utils/Html';
 import App from './containers/App';
 import routes from './routes';
-import { port, host } from './config';
+import { port } from './config';
+
 
 const app = express();
-const mailer = sendmail();
 
+const cookiesMiddleware = require('universal-cookie-express');
+
+app.use(cookiesMiddleware());
 // Using helmet to secure Express with various HTTP headers
 app.use(helmet());
 // Prevent HTTP parameter pollution.
@@ -93,6 +96,10 @@ app.get('*', (req, res) => {
 
   (async () => {
     try {
+      const { favoriteList } = req.universalCookies.cookies;
+      if (favoriteList) {
+        store.dispatch(changeFavoriteList(JSON.parse(favoriteList)));
+      }
       // Load data from server-side first
       await loadBranchData();
 
@@ -126,33 +133,6 @@ app.get('*', (req, res) => {
       console.error(`==> 😭  Rendering routes error: ${err}`);
     }
   })();
-});
-
-app.post('/sendmail', formidable(), (req, res) => {
-  const {
-    subject,
-    html,
-  } = req.fields;
-
-  const attachments = _.keys(req.files).map((key) => {
-    const file = req.files[key];
-    return {
-      filename: file.name,
-      path: file.path,
-    };
-  });
-
-  mailer({
-    from: 'al-khadzar@yandex.ru',
-    to: 'valeriya.grosheva@saltpepper.ru',
-    subject,
-    html,
-    attachments,
-  });
-
-  res.status(200).send({
-    attachments,
-  });
 });
 
 if (port) {

@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+}
+
+.img {
+  background: #ccc;
+}
+
+.preview {
+  height: 205px;
+  margin-right: 5px;
+  width: 205px;
+}
+
+.thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  height: 100px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: 100px;
+}

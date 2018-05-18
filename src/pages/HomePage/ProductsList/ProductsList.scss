@@ -1,3 +1,25 @@
+@import '~styles/variables';
+
 .products-list-item {
   margin: 0 0 20px;
+}
+
+.fetchContainer {
+  display: flex;
+  align-items: center;
+}
+
+@keyframes forPreloader {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.preloader {
+  margin-left: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-top: 4px solid $color-light-yellow;
+  animation: forPreloader 2s linear infinite;
 }

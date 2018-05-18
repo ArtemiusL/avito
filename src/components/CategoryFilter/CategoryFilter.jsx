@@ -9,7 +9,12 @@ import styles from './CategoryFilter.scss';
 
 const currentData = new Date();
 
-const CategoryFilter = ({ className, type, isFirstFetchData }) => {
+const CategoryFilter = ({
+  className,
+  type,
+  isFirstFetchData,
+  disabled,
+}) => {
   switch (type) {
     case 'auto':
       return (
@@ -23,6 +28,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             max={currentData.getFullYear()}
             component={InputRange}
             isFirstFetchData={isFirstFetchData}
+            disabled={disabled}
           />
 
           <br />
@@ -31,6 +37,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="auto.gearbox"
             component="select"
+            disabled={disabled}
           >
             <option value="automatic">Автоматическая</option>
             <option value="manual">Механическая</option>
@@ -42,6 +49,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="auto.body_type"
             component="select"
+            disabled={disabled}
           >
             <option value="sedan">Седан</option>
             <option value="universal">Универсал</option>
@@ -59,6 +67,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="immovable.property_type"
             component="select"
+            disabled={disabled}
           >
             <option value="house">Дом</option>
             <option value="flat">Квартира</option>
@@ -71,9 +80,10 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             name="immovable.square"
             min={20}
             step={1}
-            max={200}
+            max={80}
             component={InputRange}
             isFirstFetchData={isFirstFetchData}
+            disabled={disabled}
           />
 
           <br />
@@ -82,6 +92,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="immovable.rooms"
             component="select"
+            disabled={disabled}
           >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -99,6 +110,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="cameras.camera_type"
             component="select"
+            disabled={disabled}
           >
             <option value="slr">Зеркальный</option>
             <option value="digital">Цифровой</option>
@@ -110,9 +122,10 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             name="cameras.matrix_resolution"
             min={1}
             step={1}
-            max={30}
+            max={17}
             component={InputRange}
             isFirstFetchData={isFirstFetchData}
+            disabled={disabled}
           />
 
           <br />
@@ -121,6 +134,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="cameras.video_resolution"
             component="select"
+            disabled={disabled}
           >
             <option value="HD">HD</option>
             <option value="Full HD">Full HD</option>
@@ -137,6 +151,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="laptops.laptop_type"
             component="select"
+            disabled={disabled}
           >
             <option value="ultra">Ультрабук</option>
             <option value="home">Домашний</option>
@@ -148,6 +163,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="laptops.ram"
             component="select"
+            disabled={disabled}
           >
             <option value="4">4 ГБ</option>
             <option value="8">8 ГБ</option>
@@ -160,6 +176,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="laptops.screen"
             component="select"
+            disabled={disabled}
           >
             <option value="13">13</option>
             <option value="14">14</option>
@@ -173,6 +190,7 @@ const CategoryFilter = ({ className, type, isFirstFetchData }) => {
             styleName={classnames('field', 'select')}
             name="laptops.processor"
             component="select"
+            disabled={disabled}
           >
             <option value="i3">i3</option>
             <option value="i5">i5</option>
@@ -191,6 +209,7 @@ CategoryFilter.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   isFirstFetchData: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default CSSModules(CategoryFilter, styles, { allowMultiple: true });

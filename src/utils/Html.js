@@ -35,7 +35,7 @@ const Html = ({ store, htmlContent }) => {
             type="text/css"
           />
         ))}
-        
+
       </head>
       <body>
         <div
@@ -44,7 +44,11 @@ const Html = ({ store, htmlContent }) => {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: htmlContent || '' }}
         />
-
+        <script
+          dangerouslySetInnerHTML={{
+            __html: 'var exports = {};',
+          }}
+        />
         <script
           // Store the initial state into window
           // eslint-disable-next-line react/no-danger

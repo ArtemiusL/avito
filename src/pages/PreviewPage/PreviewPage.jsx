@@ -4,12 +4,28 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withLastLocation } from 'react-router-last-location';
 import { push, goBack } from 'react-router-redux';
+import selectors from '_selectors';
+import getFirstLetterUpper from '_utils/getFirstLetterUpper';
+
+import {
+  fetchProducts,
+  fetchSellers,
+} from '_actions/products';
+
 import CloseButton from './CloseButton';
+import Main from './Main';
+import Aside from './Aside';
 
 import styles from './PreviewPage.scss';
 
+
 @CSSModules(styles, { allowMultiple: true })
 class PreviewPage extends PureComponent {
+  componentDidMount() {
+    this.props.onFetchSellers();
+    this.props.onFetchProducts();
+  }
+
   handleCloseClisk = () => {
     const {
       location,
@@ -28,15 +44,25 @@ class PreviewPage extends PureComponent {
   }
 
   render() {
-    const { className } = this.props;
+    const {
+      className,
+      data,
+      seller,
+    } = this.props;
+
+    if (!data) {
+      return <div />;
+    }
+    const { title } = data;
 
     return (
-      <div className={className} styleName="root">
+      <div className={className}>
         <div styleName="overlay">
           <div styleName="details">
             <CloseButton onClick={this.handleCloseClisk} />
-            PreviewPage
-            <img src="https://pp.userapi.com/c543101/v543101324/46b6c/VnUAhmrCUvg.jpg" alt="Salma" />
+            <h2 styleName="title">{getFirstLetterUpper(title)}</h2>
+            <Main styleName="main" {...data} />
+            <Aside {...data} seller={seller} />
           </div>
         </div>
       </div>
@@ -46,10 +72,49 @@ class PreviewPage extends PureComponent {
 
 PreviewPage.propTypes = {
   className: PropTypes.string,
+  data: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    year: PropTypes.number,
+    pictures: PropTypes.array,
+    address: PropTypes.shape({
+      lat: PropTypes.number,
+      lng: PropTypes.number,
+    }),
+    id: PropTypes.string,
+  }),
+  seller: PropTypes.shape({
+    category: PropTypes.string,
+    isCompany: PropTypes.bool,
+    name: PropTypes.string,
+    rating: PropTypes.number,
+    id: PropTypes.string,
+  }),
   location: PropTypes.object,
   lastLocation: PropTypes.object,
   onPushHistory: PropTypes.func,
   onGoBack: PropTypes.func,
+  onFetchSellers: PropTypes.func,
+  onFetchProducts: PropTypes.func,
+};
+
+const { currentProductSelector, currentSellerSelector } = selectors;
+
+const mapStateToProps = (state, ownProps) => {
+  const getDataToId = currentProductSelector(ownProps.match.params.id);
+  const curData = getDataToId(state);
+  if (!curData) {
+    return ({
+      data: curData,
+    });
+  }
+  const curSellerId = curData.relationships.seller;
+  const getSellerToId = currentSellerSelector(curSellerId);
+
+  return ({
+    data: curData,
+    seller: getSellerToId(state),
+  });
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -59,6 +124,12 @@ const mapDispatchToProps = dispatch => ({
   onGoBack() {
     dispatch(goBack());
   },
+  onFetchProducts() {
+    dispatch(fetchProducts());
+  },
+  onFetchSellers() {
+    dispatch(fetchSellers());
+  },
 });
 
-export default connect(null, mapDispatchToProps)(withLastLocation(PreviewPage));
+export default connect(mapStateToProps, mapDispatchToProps)(withLastLocation(PreviewPage));

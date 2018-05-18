@@ -67,12 +67,34 @@
       content: '❤️';
     }
   }
+
+  &.active {
+    &::after {
+      content: '❤️';
+    }
+
+    &:hover {
+      &::after {
+        content: '💛';
+      }
+    }
+  }
 }
 
 .product-title {
   font-size: 32px;
   letter-spacing: -1.5px;
   margin: 0;
+
+  span {
+    text-decoration: underline;
+    text-decoration-color: $color-dusty-gray;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-dusty-gray;
+    }
+  }
 }
 
 .product-price {
