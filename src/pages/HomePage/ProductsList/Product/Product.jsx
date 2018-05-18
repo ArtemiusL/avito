@@ -12,7 +12,6 @@ const Product = ({
   title,
   price,
   address,
-  year,
   pictures,
   onClick,
   onHeartClick,
@@ -54,7 +53,7 @@ const Product = ({
         <p styleName="product-address">
           <Address address={address} />
         </p>
-        <p styleName="product-date">{year}</p>
+        <p styleName="product-date">Время размещения не указано</p>
       </div>
     </div>
   );
@@ -65,7 +64,6 @@ Product.propTypes = {
   title: PropTypes.string,
   price: PropTypes.number,
   address: PropTypes.object,
-  year: PropTypes.number,
   pictures: PropTypes.array,
   id: PropTypes.string,
   onClick: PropTypes.func,
