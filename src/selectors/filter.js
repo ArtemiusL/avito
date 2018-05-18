@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import orderBy from 'lodash/fp/orderBy';
 
 import { rootSelector } from './common';
-import { productsSelector } from './products';
+import { productsSelector, favoriteProductsSelector } from './products';
 
 import * as filters from './filters';
 
@@ -30,11 +30,14 @@ export const filteredCategorySelector = createSelector(
 export const filteredCurrentCategorySelector = createSelector(
   filteredCategorySelector,
   filterSelector,
-  (products, productfilters) => {
-    const { category } = productfilters;
-    return (
+  favoriteProductsSelector,
+  (products, productfilters, favoriteList) => {
+    console.log('productfilters', productfilters);
+    const { isFavorite, category } = productfilters;
+    const filteredArray =  (
       category === 'all' ? [...products] : filters[category]([...products], productfilters[category])
     );
+    return isFavorite ? filteredArray.filter(item => favoriteList.some(favItem => favItem === item.id)) : filteredArray;
   },
 );
 
