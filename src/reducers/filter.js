@@ -4,7 +4,7 @@ import {
 } from '_actions/constants/filter';
 
 const defaultState = {
-  isFavorite: true,
+  isFavorite: false,
   category: 'all',
   sort: 'popular',
   price: 50000,

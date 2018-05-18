@@ -13,7 +13,8 @@ const ProductsList = ({
   onHeartClick,
 }) => (
   <div className={className}>
-    {data.length !== 0 && data.map((item) => {
+    {data.length !== 0 ? (
+      data.map((item) => {
       const isFavorite = favoriteList.length !== 0 &&
        favoriteList.some(favItem => favItem === item.id);
 
@@ -27,7 +28,12 @@ const ProductsList = ({
           {...item}
         />
       );
-    })}
+    })) : (
+      <h2>
+        К сожалению обявлений не найдено.
+        Попробуйте ещё раз вдруг вам повезет!
+      </h2>
+    )}
   </div>
 );
 
