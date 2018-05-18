@@ -19,6 +19,7 @@ class RadioButtonGroup extends PureComponent {
       list,
       input: { value },
       meta: { touched, error },
+      disabled,
     } = this.props;
 
     const hasError = error && touched;
@@ -33,6 +34,7 @@ class RadioButtonGroup extends PureComponent {
               {...item}
               isActive={value === item.value}
               onClick={this.handleClick}
+              disabled={disabled}
             />
           ))}
         </ul>
@@ -58,6 +60,7 @@ RadioButtonGroup.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
   }),
+  disabled: PropTypes.bool,
 };
 
 export default RadioButtonGroup;

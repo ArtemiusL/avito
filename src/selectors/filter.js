@@ -17,13 +17,18 @@ export const categoryFilterSelector = createSelector(
   ({ category }) => category,
 );
 
+export const isFavoriteFilterSelector = createSelector(
+  filterSelector,
+  ({ isFavorite }) => isFavorite,
+);
+
 export const filteredCategorySelector = createSelector(
   productsSelector,
   filterSelector,
-  (products, { category }) => {
-    if (category === 'all') {
-      return [...products];
-    } return filters.byCategory([...products], category);
+  (products, { category, isFavorite }) => {
+    if (isFavorite) return products;
+    else if (category === 'all') return products;
+    return filters.byCategory([...products], category);
   },
 );
 
@@ -32,19 +37,18 @@ export const filteredCurrentCategorySelector = createSelector(
   filterSelector,
   favoriteProductsSelector,
   (products, productfilters, favoriteList) => {
-    console.log('productfilters', productfilters);
-    const { isFavorite, category } = productfilters;
+    const { isFavorite, category } = productfilters
     const filteredArray =  (
       category === 'all' ? [...products] : filters[category]([...products], productfilters[category])
     );
-    return isFavorite ? filteredArray.filter(item => favoriteList.some(favItem => favItem === item.id)) : filteredArray;
+    return isFavorite ? products.filter(item => favoriteList.some(favItem => favItem === item.id)) : filteredArray;
   },
 );
 
 export const filteredByPriceSelector = createSelector(
   filteredCurrentCategorySelector,
   filterSelector,
-  (products, { price }) => (filters.byPrice([...products], price)),
+  (products, { price, isFavorite }) => isFavorite ? products : (filters.byPrice([...products], price)),
 );
 
 export const sortedProducts = createSelector(

@@ -11,6 +11,7 @@ const InputRange = ({
   min,
   max,
   step,
+  disabled,
 }) => {
   const inputValue = isFirstFetchData ? max : value;
   return (
@@ -24,6 +25,7 @@ const InputRange = ({
           min={min}
           max={max}
           step={step}
+          disabled={disabled}
           onChange={onChange}
         />
         <div styleName="value">
@@ -44,6 +46,7 @@ InputRange.propTypes = {
     onChange: PropTypes.func,
   }),
   isFirstFetchData: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default CSSModules(InputRange, styles, { allowMultiple: true });

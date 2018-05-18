@@ -44,6 +44,7 @@ class Form extends PureComponent {
       category,
       dataForInitialize,
       isFirstFetchData,
+      isFavoriteFilter,
     } = this.props;
 
     return (
@@ -67,6 +68,7 @@ class Form extends PureComponent {
             styleName={classnames('field', 'select')}
             name="category"
             component="select"
+            disabled={isFavoriteFilter}
           >
             <option value="all">Все объявления</option>
             <option value="auto">Авто</option>
@@ -78,6 +80,7 @@ class Form extends PureComponent {
 
         <CategoryFilter
           styleName="group"
+          disabled={isFavoriteFilter}
           isFirstFetchData={isFirstFetchData}
           type={category || dataForInitialize.category}
         />
@@ -89,6 +92,7 @@ class Form extends PureComponent {
             name="sort"
             list={fishRadio}
             component={RadioButtonGroup}
+            disabled={isFavoriteFilter}
           />
         </fieldset>
 
@@ -103,6 +107,7 @@ class Form extends PureComponent {
             max={maxPrice}
             isFirstFetchData={isFirstFetchData}
             component={InputRange}
+            disabled={isFavoriteFilter}
           />
         </fieldset>
         <button styleName="btnSubmit" type="submit">
@@ -121,6 +126,7 @@ Form.propTypes = {
   dataForInitialize: PropTypes.object,
   category: PropTypes.string,
   isFirstFetchData: PropTypes.bool,
+  isFavoriteFilter: PropTypes.bool,
 };
 
 export default reduxForm({
