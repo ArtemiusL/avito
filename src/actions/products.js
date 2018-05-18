@@ -4,7 +4,7 @@ import {
   CHANGE_FIRST_FETCH_DATA,
   FETCH_SELLERS,
   FETCH_SELLERS_SUCCESS,
-  ADD_IN_FAVORITE,
+  TOGGLE_IN_FAVORITE,
   CHANGE_FAVORITE_LIST,
 } from './constants/products';
 
@@ -30,8 +30,8 @@ export const fetchSellersSuccess = payload => ({
   payload,
 });
 
-export const addProductInFavorite = payload => ({
-  type: ADD_IN_FAVORITE,
+export const toggleProductInFavorite = payload => ({
+  type: TOGGLE_IN_FAVORITE,
   payload,
 });
 

@@ -13,7 +13,7 @@ import {
 import {
   FETCH_PRODUCTS,
   FETCH_SELLERS,
-  ADD_IN_FAVORITE,
+  TOGGLE_IN_FAVORITE,
 } from '_actions/constants/products';
 
 import {
@@ -45,15 +45,23 @@ export function* fetchProductsSaga() {
   }
 }
 // eslint-disable-next-line
-export function* addInFavoriteSaga(action) {
+export function* toggleInFavoriteSaga(action) {
   const favoriteList = cookies.get(FAVORITE_LIST);
   cookies.remove(FAVORITE_LIST);
   if (favoriteList) {
-    cookies.set(
-      FAVORITE_LIST,
-      JSON.stringify([...favoriteList, action.payload]),
-      { expires: EXPIRE_COOKIE },
-    );
+    if (favoriteList.indexOf(action.payload) === -1) {
+      cookies.set(
+        FAVORITE_LIST,
+        JSON.stringify([...favoriteList, action.payload]),
+        { expires: EXPIRE_COOKIE },
+      );
+    } else {
+      cookies.set(
+        FAVORITE_LIST,
+        JSON.stringify(favoriteList.filter(item => item !== action.payload)),
+        { expires: EXPIRE_COOKIE },
+      );
+    }
   } else {
     cookies.set(
       FAVORITE_LIST,
@@ -82,6 +90,6 @@ export default function* () {
   yield all([
     takeEvery(FETCH_PRODUCTS, fetchProductsSaga),
     takeEvery(FETCH_SELLERS, fetchSellersSaga),
-    takeEvery(ADD_IN_FAVORITE, addInFavoriteSaga),
+    takeEvery(TOGGLE_IN_FAVORITE, toggleInFavoriteSaga),
   ]);
 }

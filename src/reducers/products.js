@@ -2,7 +2,7 @@ import {
   FETCH_PRODUCTS_SUCCESS,
   CHANGE_FIRST_FETCH_DATA,
   FETCH_SELLERS_SUCCESS,
-  ADD_IN_FAVORITE,
+  TOGGLE_IN_FAVORITE,
   CHANGE_FAVORITE_LIST,
 } from '_actions/constants/products';
 
@@ -26,8 +26,14 @@ export default (state = initialState, action) => {
     case FETCH_SELLERS_SUCCESS:
       return { ...state, sellers: payload };
 
-    case ADD_IN_FAVORITE:
-      return { ...state, favoriteDataIds: [...state.favoriteDataIds, payload] };
+    case TOGGLE_IN_FAVORITE:
+      if (state.favoriteDataIds.indexOf(payload) === -1) {
+        return { ...state, favoriteDataIds: [...state.favoriteDataIds, payload] };
+      }
+      return {
+        ...state,
+        favoriteDataIds: state.favoriteDataIds.filter(item => item !== payload),
+      };
 
     case CHANGE_FAVORITE_LIST:
       return { ...state, favoriteDataIds: payload };

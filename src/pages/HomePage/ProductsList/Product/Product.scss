@@ -62,10 +62,21 @@
     font-family: 'system-ui', sans-serif;
   }
 
-  &:hover,
+  &:hover {
+    &::after {
+      content: '❤️';
+    }
+  }
+
   &.active {
     &::after {
       content: '❤️';
+    }
+
+    &:hover {
+      &::after {
+        content: '💛';
+      }
     }
   }
 }

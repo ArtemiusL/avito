@@ -10,7 +10,7 @@ import FormContainer from '_containers/FormContainer';
 
 import {
   fetchProducts,
-  addProductInFavorite,
+  toggleProductInFavorite,
 } from '_actions/products';
 
 import ProductsList from './ProductsList';
@@ -80,7 +80,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(push(params));
   },
   onProductHeartClick(id) {
-    dispatch(addProductInFavorite(id));
+    dispatch(toggleProductInFavorite(id));
   },
 });
 
