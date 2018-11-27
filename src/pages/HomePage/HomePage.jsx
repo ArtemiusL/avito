@@ -16,6 +16,8 @@ import {
 import ProductsList from './ProductsList';
 import styles from './HomePage.scss';
 
+// test comment
+
 @CSSModules(styles, { allowMultiple: true })
 class HomePage extends PureComponent {
   componentDidMount() {
